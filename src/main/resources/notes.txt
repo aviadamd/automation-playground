@@ -1,0 +1,2 @@
+allure serve target/allure-results - open allure server test result
+thats it

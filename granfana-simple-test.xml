@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="grafana-tests">
+    <listeners>
+        <listener class-name = "utilities.Listeners"/>
+    </listeners>
+    <test name= "test suite1">
+        <classes>
+            <class name="workFlows.grafana.GrafanaLoginTest"/>
+        </classes>
+    </test>
+</suite>
