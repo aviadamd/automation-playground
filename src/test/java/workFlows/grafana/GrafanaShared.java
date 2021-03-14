@@ -15,7 +15,7 @@ import static pageObjects.InitWebPages.grafanaSideMenu;
 public class GrafanaShared extends CommonOperations {
 
     @Step("Login grafana flow with {name} / {password}.")
-    public static void login(@Optional String name, @Optional String password) {
+    public static void login(String name, String password) {
         UiActions.sendKeys(grafanaLoginPage.userNameEditText, name);
         UiActions.sendKeys(grafanaLoginPage.userPasswordEditText, password);
         UiActions.click(grafanaLoginPage.loginBtn);

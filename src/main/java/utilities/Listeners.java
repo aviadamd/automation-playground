@@ -6,6 +6,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+import org.testng.log4testng.Logger;
 
 public class Listeners extends CommonOperations implements ITestListener {
 
