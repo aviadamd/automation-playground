@@ -1,5 +1,6 @@
 package workFlows.grafana;
 
+import io.qameta.allure.Allure;
 import io.qameta.allure.Description;
 import org.testng.annotations.Test;
 import utilities.CommonOperations;
@@ -11,6 +12,7 @@ public class GrafanaLoginTest extends CommonOperations {
     @Test(description = "test 01 : login to grafana")
     @Description("login to grafana with valid user name and pass word")
     public void test01_login() {
+        //Allure.addAttachment("demo print","air please");
         GrafanaShared.login("admin", "5311072BsDvir");
     }
 
