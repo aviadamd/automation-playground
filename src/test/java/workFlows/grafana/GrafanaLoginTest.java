@@ -1,6 +1,8 @@
 package workFlows.grafana;
 
 import io.qameta.allure.Description;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import utilities.CommonOperations;
 import utilities.Listeners;
@@ -8,10 +10,20 @@ import utilities.Listeners;
 @org.testng.annotations.Listeners({Listeners.class})
 public class GrafanaLoginTest extends CommonOperations {
 
+    private String user;
+    private String password;
+
+    @BeforeTest
+    @Parameters({"user", "password"})
+    public void setupParameters(String user,String password){
+        this.user = user;
+        this.password = password;
+    }
+
     @Test(description = "test 01 : login to grafana")
-    @Description("Description : login to grafana with valid user name and pass word")
+    @Description("login to grafana with valid user name and pass word")
     public void test01_login() {
-        WebFlows.login("admin","5311072BsDvir");
+        GrafanaShared.login(user, password);
     }
 
 }

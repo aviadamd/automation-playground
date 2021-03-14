@@ -3,7 +3,9 @@
     <listeners>
         <listener class-name = "utilities.Listeners"/>
     </listeners>
-    <test name= "test suite1">
+    <test name= "test suite 1 login test">
+        <parameter name="user" value="admin" />
+        <parameter name="password" value="5311072BsDvir" />
         <classes>
             <class name="workFlows.grafana.GrafanaLoginTest"/>
         </classes>

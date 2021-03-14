@@ -42,7 +42,6 @@ public class Verfications extends CommonOperations {
             if (isTextEquals(elements.get(i),text.get(i))) {
                 System.out.println("actual text " + elements.get(i).getText() +
                         " equals expected test " + text.get(i));
-
             } else {
                 System.out.println("actual text " + elements.get(i).getText() +
                         " not equals expected test " + text.get(i));

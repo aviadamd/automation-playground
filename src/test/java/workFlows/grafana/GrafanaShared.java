@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 import static pageObjects.InitWebPages.grafanaLoginPage;
 import static pageObjects.InitWebPages.grafanaSideMenu;
 
-public class WebFlows extends CommonOperations {
+public class GrafanaShared extends CommonOperations {
 
     @Step("Login grafana flow with {name} / {password}.")
     public static void login(String name, String password) {
