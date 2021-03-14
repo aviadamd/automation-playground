@@ -1,0 +1,10 @@
+{
+  "dictionary" : [
+    {
+      "key": 0,
+      "platform": "web",
+      "typeFromPlatform": "chrome",
+      "url": "http://localhost:3000/"
+    }
+  ]
+}
