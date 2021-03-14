@@ -3,6 +3,7 @@ package workFlows.grafana;
 import extensions.UiActions;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.Optional;
 import utilities.CommonOperations;
 
 import java.util.LinkedHashMap;
@@ -14,7 +15,7 @@ import static pageObjects.InitWebPages.grafanaSideMenu;
 public class GrafanaShared extends CommonOperations {
 
     @Step("Login grafana flow with {name} / {password}.")
-    public static void login(String name, String password) {
+    public static void login(@Optional String name, @Optional String password) {
         UiActions.sendKeys(grafanaLoginPage.userNameEditText, name);
         UiActions.sendKeys(grafanaLoginPage.userPasswordEditText, password);
         UiActions.click(grafanaLoginPage.loginBtn);
