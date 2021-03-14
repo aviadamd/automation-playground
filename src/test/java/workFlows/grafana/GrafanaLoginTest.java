@@ -2,6 +2,7 @@ package workFlows.grafana;
 
 import io.qameta.allure.Description;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import utilities.CommonOperations;
@@ -15,7 +16,7 @@ public class GrafanaLoginTest extends CommonOperations {
 
     @BeforeTest
     @Parameters({"user", "password"})
-    public void setupParameters(String user,String password){
+    public void setupParameters(@Optional String user,@Optional String password){
         this.user = user;
         this.password = password;
     }
