@@ -2,6 +2,7 @@ package utilities;
 
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Description;
+import io.qameta.allure.Link;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;

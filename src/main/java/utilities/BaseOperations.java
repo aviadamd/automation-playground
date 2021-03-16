@@ -1,5 +1,6 @@
 package utilities;
 
+import io.qameta.allure.Link;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
