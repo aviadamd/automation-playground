@@ -13,7 +13,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 import ru.yandex.qatools.ashot.comparison.ImageDiffer;
-import utilities.config.JsonReader;
+import utilities.config.data.JsonReader;
 
 import java.io.File;
 import java.util.HashMap;

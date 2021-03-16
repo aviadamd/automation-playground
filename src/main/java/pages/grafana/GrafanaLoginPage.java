@@ -1,10 +1,16 @@
-package pageObjects.grafana;
+package pages.grafana;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import pages.InitWebPages;
 
-public class GrafanaLoginPage {
+public class GrafanaLoginPage extends InitWebPages {
+
+    public GrafanaLoginPage(WebDriver driver) {
+        super(driver);
+    }
 
     @FindBy(how = How.NAME, using = "user")
     public WebElement userNameEditText;

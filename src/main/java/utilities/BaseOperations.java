@@ -1,16 +1,18 @@
 package utilities;
 
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
-import utilities.config.JsonReader;
-
+import pages.WebUi;
+import utilities.config.data.JsonReader;
 import java.util.concurrent.TimeUnit;
 
-import static pageObjects.InitWebPages.initWebPages;
+@Slf4j
+public class BaseOperations extends Base {
 
-public class CommonOperations extends Base {
+    public static WebUi webUi;
 
     @BeforeClass(description = "before class start action")
     public void startSession() {
@@ -23,15 +25,20 @@ public class CommonOperations extends Base {
                 initApplication();
                 break;
         }
-        System.out.println("init " + getPlatform + " platform");
-        initWebPages();
-
+        log.debug("init " + getPlatform + " platform");
+        webUi = new WebUi(driver);
     }
 
     @AfterMethod(description = "after method return to base test url")
     public void afterMethod() {
-
-        driver.get(new JsonReader().jsonData(0).url);
+        String getPlatform = new JsonReader().jsonData(0).platform;
+        switch (getPlatform) {
+            case "web" :
+                driver.get(new JsonReader().jsonData(0).url);
+                break;
+            case "mobile" :
+                break;
+        }
     }
 
     @AfterClass(description = "quit sessions")
@@ -63,7 +70,7 @@ public class CommonOperations extends Base {
                 driver = Base.initFireFoxDriver();
                 break;
         }
-        System.out.println("init " + browser + " type platform");
+        log.debug("init " + browser + " type platform");
         driver.manage().window().maximize();
         driver.get(new JsonReader().jsonData(0).url);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -71,22 +78,9 @@ public class CommonOperations extends Base {
 
     private void initApplication() {
         String application = new JsonReader().jsonData(0).typeFromPlatform;
-        if (application.equals("appium")) {
-            driver = Base.startAppiumServer();
-        }
+        if (application.equals("appium")) driver = Base.startAppiumServer();
         else throw new IllegalArgumentException("provide valid application driver type");
-        System.out.println("init " + application + " type platform");
+        log.debug("init " + application + " type platform");
     }
-
-//    @BeforeSuite
-//    void setAllureEnvironment() {
-//        allureEnvironmentWriter(
-//                ImmutableMap.<String, String>builder()
-//                        .put("Browser", "Chrome")
-//                        .put("Browser.Version", "70.0.3538.77")
-//                        .put("URL", "http://testjs.site88.net")
-//                        .build(), System.getProperty("user.dir")
-//                        + "/allure-results/");
-//    }
 
 }

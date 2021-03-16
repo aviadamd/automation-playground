@@ -1,55 +1,56 @@
 package utilities;
 
 import io.qameta.allure.Attachment;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-import org.testng.log4testng.Logger;
 
-public class Listeners extends CommonOperations implements ITestListener {
+@Slf4j
+public class Listeners extends BaseOperations implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult result) {
-        System.out.println("------------------ start "
+        log.debug("------------------ start "
                 + result.getName() + " ----------------");
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        System.out.println("------------------ success "
+        log.debug("------------------ success "
                 + result.getName() + " ----------------");
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
-        System.out.println("------------------ fail "
+        log.debug("------------------ fail "
                 + result.getName() + " ----------------");
         if (driver != null) saveScreenShots();
     }
 
     @Override
     public void onTestSkipped(ITestResult result) {
-        System.out.println("------------------ skip "
+        log.debug("------------------ skip "
                 + result.getName() + " ----------------");
     }
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
-        System.out.println("------------------ fail with steps success "
+        log.debug("------------------ fail with steps success "
                 + result.getName() + " ----------------");
     }
 
     @Override
     public void onStart(ITestContext context) {
-        System.out.println("------------------ start "
+        log.debug("------------------ start "
                 + context.getName() + " ----------------");
     }
 
     @Override
     public void onFinish(ITestContext context) {
-        System.out.println("------------------ finish tests "
+        log.debug("------------------ finish tests "
                 + context.getName() + " ----------------");
     }
 

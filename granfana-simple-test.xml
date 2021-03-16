@@ -5,7 +5,7 @@
     </listeners>
     <test name= "test suite 1 login test">
         <classes>
-            <class name="workFlows.grafana.GrafanaLoginTest"/>
+            <class name="grafanas.GrafanaLoginTest"/>
         </classes>
     </test>
 </suite>

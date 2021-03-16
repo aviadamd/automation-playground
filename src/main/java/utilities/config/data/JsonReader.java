@@ -1,4 +1,4 @@
-package utilities.config;
+package utilities.config.data;
 
 import com.google.gson.Gson;
 
