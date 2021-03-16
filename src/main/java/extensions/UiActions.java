@@ -38,11 +38,11 @@ public class UiActions extends SharedMethods {
         }
     }
 
-    @Step("click action")
+    @Step("click action on { element }")
     public void click(WebElement element) {
         try {
-            log.debug("Click on " + element);
             elementToBeClickable(element);
+            log.debug("click on " + element);
             element.click();
         } catch (WebDriverException  driverException) {
             Assert.fail("Fail click ", driverException);

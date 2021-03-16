@@ -11,12 +11,4 @@ public class GrafanaShared extends SharedMethods {
         uiActions().sendKeys(webUi.grafanaLoginPage.userPasswordEditText, password);
         uiActions().click(webUi.grafanaLoginPage.loginBtn);
     }
-
-//    @Step("Log out from grafana")
-//    public static void logOut() {
-//        Stream.of(webUi.grafanaSideMenu.discconectIcon, grafanaSideMenu.signOut)
-//                .sequential()
-//                .filter(UiActions::elementPresented)
-//                .forEach(UiActions::click);
-//    }
 }
