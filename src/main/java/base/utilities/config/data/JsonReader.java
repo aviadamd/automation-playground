@@ -1,7 +1,6 @@
 package base.utilities.config.data;
 
 import com.google.gson.Gson;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
@@ -9,14 +8,16 @@ import java.util.HashMap;
 public class JsonReader {
 
     public JsonData jsonData(Integer key) {
-        return data(System.getProperty("user.dir")
-                +"/src/main/resources/config.json").get(key);
+        final String path = "/src/main/resources/config.json";
+        return data(prop + path).get(key);
     }
 
     public JsonPath jsonPath(Integer key) {
-        return path(System.getProperty("user.dir")
-                +"/src/main/resources/paths.json").get(key);
+        final String path = "/src/main/resources/paths.json";
+        return path(prop + path).get(key);
     }
+
+    private final String prop = System.getProperty("user.dir");
 
     private HashMap<Integer,JsonData> data(String file) {
         HashMap<Integer,JsonData> config = new HashMap<>();

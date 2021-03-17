@@ -2,11 +2,8 @@ package base.utilities;
 
 import base.Verfications;
 import base.UiActions;
-import base.utilities.config.objects.SharedObjects;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +15,6 @@ import org.testng.annotations.BeforeClass;
 import pages.WebUi;
 import base.utilities.config.data.JsonReader;
 import test.GrafanaShared;
-
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
@@ -27,18 +23,21 @@ import java.util.concurrent.TimeUnit;
 @ContextConfiguration(classes = {
         UiActions.class,
         Verfications.class,
-        GrafanaShared.class
+        GrafanaShared.class,
+        JsonReader.class
 })
-@ComponentScan(basePackages = {"org.example"})
+@ComponentScan(basePackages = {"org.automation.project"})
 public class BaseOperations extends Base {
 
     public static WebUi webUi;
     @Bean public UiActions uiActions() { return new UiActions(); }
     @Bean public Verfications verfications() { return new Verfications(); }
     @Bean public GrafanaShared grafanaShared() { return new GrafanaShared();}
+    @Bean public JsonReader jsonReader() { return new JsonReader();}
+
     @BeforeClass(description = "before class start action")
     public void startSession() {
-        String getPlatform = new JsonReader().jsonData(0).platform;
+        String getPlatform = jsonReader().jsonData(0).platform;
         switch (getPlatform) {
             case "web" :
                 initWebBrowser();
@@ -53,10 +52,10 @@ public class BaseOperations extends Base {
 
     @AfterMethod(description = "after method return to base test url")
     public void afterMethod() {
-        String getPlatform = new JsonReader().jsonData(0).platform;
+        String getPlatform = jsonReader().jsonData(0).platform;
         switch (getPlatform) {
             case "web" :
-                driver.get(new JsonReader().jsonData(0).url);
+                driver.get(jsonReader().jsonData(0).url);
                 break;
             case "mobile" :
                 break;
@@ -65,7 +64,7 @@ public class BaseOperations extends Base {
 
     @AfterClass(description = "quit sessions")
     public void closeSession() {
-        String getPlatform = new JsonReader().jsonData(0).platform;
+        String getPlatform = jsonReader().jsonData(0).platform;
         switch (getPlatform) {
             case "web" :
                 driver.quit();
@@ -83,7 +82,7 @@ public class BaseOperations extends Base {
     }
 
     private void initWebBrowser() {
-        String browser = new JsonReader().jsonData(0).typeFromPlatform;
+        String browser = jsonReader().jsonData(0).typeFromPlatform;
         switch (browser) {
             case "chrome":
                 driver = Base.initChromeDriver();
@@ -94,12 +93,12 @@ public class BaseOperations extends Base {
         }
         log.debug("init " + browser + " type platform");
         driver.manage().window().maximize();
-        driver.get(new JsonReader().jsonData(0).url);
+        driver.get(jsonReader().jsonData(0).url);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     private void initApplication() {
-        String application = new JsonReader().jsonData(0).typeFromPlatform;
+        String application = jsonReader().jsonData(0).typeFromPlatform;
         if (application.equals("appium")) driver = Base.startAppiumServer();
         else throw new IllegalArgumentException("provide valid application driver type");
         log.debug("init " + application + " type platform");
