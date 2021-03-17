@@ -1,4 +1,4 @@
-package utilities;
+package base.utilities;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
@@ -13,7 +13,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 import ru.yandex.qatools.ashot.comparison.ImageDiffer;
-import utilities.config.data.JsonReader;
+import base.utilities.config.data.JsonReader;
 
 import java.io.File;
 import java.util.HashMap;

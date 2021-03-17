@@ -1,4 +1,4 @@
-package utilities.config.data;
+package base.utilities.config.data;
 
 public class JsonData {
 

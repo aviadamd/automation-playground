@@ -1,7 +1,6 @@
-package utilities.config.data;
+package base.utilities.config.data;
 
 import com.google.gson.annotations.SerializedName;
-import utilities.config.data.JsonData;
 
 import java.util.ArrayList;
 

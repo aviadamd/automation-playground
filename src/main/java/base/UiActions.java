@@ -1,5 +1,6 @@
-package extensions;
+package base;
 
+import base.utilities.BaseOperations;
 import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriverException;
@@ -10,8 +11,6 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider;
-import utilities.BaseOperations;
-import utilities.config.objects.SharedMethods;
 
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -19,7 +18,7 @@ import java.io.IOException;
 import java.util.function.BiConsumer;
 
 @Slf4j
-public class UiActions extends SharedMethods {
+public class UiActions extends BaseOperations {
 
     @Step("perform step action")
     public void perform(String text, BiConsumer<UiActions,Verfications> actionsConsumer) {

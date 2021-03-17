@@ -1,17 +1,17 @@
-package extensions;
+package base;
 
+import base.utilities.BaseOperations;
 import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
-import utilities.config.objects.SharedMethods;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 @Slf4j
-public class Verfications extends SharedMethods {
+public class Verfications extends BaseOperations {
 
     @Step("load page or elements")
     public void load(ArrayList<WebElement> elements) {
