@@ -25,9 +25,6 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 @EnableAspectJAutoProxy
 @ContextConfiguration(classes = {
-        Base.class,
-        BaseOperations.class,
-        SharedObjects.class,
         UiActions.class,
         Verfications.class,
         GrafanaShared.class
