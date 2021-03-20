@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        TEST_CLASS
+        TEST_CLASS = "NONE"
     }
     stages {
         stage('Build Jar') {
