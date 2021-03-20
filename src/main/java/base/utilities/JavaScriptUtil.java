@@ -1,22 +1,25 @@
 package base.utilities;
 
 import base.baseUtilities.BaseOperations;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class JavaScriptUtil extends BaseOperations {
-  WebDriver driver;
+import java.util.Collections;
+import java.util.List;
 
-  public JavaScriptUtil(WebDriver driver) {
-    this.driver = driver;
-  }
+@Slf4j
+public class JavaScriptUtil extends BaseOperations {
 
   public void flash(WebElement element) {
-    String bgcolor = element.getCssValue("backgroundColor");
-    for (int i = 0; i < 20; i++) {
+    flash(Collections.singletonList(element));
+  }
+
+  public void flash(List<WebElement> elements) {
+    for (WebElement element : elements) {
       changeColor("rgb(0,200,0)", element); // 1
-      changeColor(bgcolor, element); // 2
+      changeColor(element.getCssValue("backgroundColor"), element); // 2
     }
   }
 
@@ -27,7 +30,7 @@ public class JavaScriptUtil extends BaseOperations {
     try {
       Thread.sleep(20);
     } catch (InterruptedException e) {
-      System.out.println(e.getMessage());
+      log.error(e.getMessage());
       Thread.currentThread().interrupt();
     }
   }
@@ -89,27 +92,28 @@ public class JavaScriptUtil extends BaseOperations {
 
   public void checkPageIsReady() {
     JavascriptExecutor js = (JavascriptExecutor) driver;
-    // Initially bellow given if condition will check ready state of page.
+    //given if condition will check ready state of page.
     if (js.executeScript("return document.readyState").toString().equals("complete")) {
-      System.out.println("Page Is loaded.");
+      log.debug("page Is loaded.");
       return;
     }
 
-    // This loop will rotate for 25 times to check If page Is ready after
-    // every 1 second.
-    // You can replace your value with 25 If you wants to Increase or
-    // decrease wait time.
-    for (int i = 0; i < 25; i++) {
-      try {
-        Thread.sleep(1000);
-      } catch (InterruptedException e) {
-        System.out.println(e.getMessage());
-        Thread.currentThread().interrupt();
-      }
-      // To check page ready state.
+    for (int i = 0; i < 15; i++) {
+      sleep(1000);
+      // check page ready state.
       if (js.executeScript("return document.readyState").toString().equals("complete")) {
+        log.debug("page Is loaded.");
         break;
       }
+    }
+  }
+
+  private void sleep(int time) {
+    try {
+      Thread.sleep(time);
+    } catch (InterruptedException interruptedException) {
+      log.error(interruptedException.getMessage());
+      Thread.currentThread().interrupt();
     }
   }
 }
