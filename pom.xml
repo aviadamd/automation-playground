@@ -96,6 +96,11 @@
             <artifactId>spring-web</artifactId>
             <version>5.2.3.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>com.aventstack</groupId>
+            <artifactId>extentreports</artifactId>
+            <version>5.0.5</version>
+        </dependency>
     </dependencies>
 
     <build>
