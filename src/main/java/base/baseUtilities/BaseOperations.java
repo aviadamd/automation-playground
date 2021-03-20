@@ -4,6 +4,9 @@ import base.utilities.JavaScriptUtil;
 import base.utilities.UiActions;
 import base.utilities.Verfications;
 import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -38,6 +41,8 @@ public class BaseOperations extends Base {
     @Bean public JavaScriptUtil jsUtil() { return new JavaScriptUtil(); }
     @Bean public JsonReader jsonReader() { return new JsonReader();}
 
+    @Severity(SeverityLevel.BLOCKER)
+    @Story("init web driver with base url")
     @BeforeClass(description = "before class start action")
     public void startSession() {
         String getPlatform = jsonReader().jsonData(1).platform;

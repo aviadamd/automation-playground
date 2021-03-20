@@ -1,6 +1,5 @@
 package base.baseUtilities;
 
-import base.baseUtilities.BaseOperations;
 import io.qameta.allure.Attachment;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.OutputType;
@@ -26,11 +25,16 @@ public class Listeners extends BaseOperations implements ITestListener {
     @Override
     public void onTestFailure(ITestResult result) {
         log.debug("fail " + result.getName());
-        if (driver != null) saveScreenshotPNG(driver);
+        if (driver != null) {
+            ITestContext context = result.getTestContext();
+            WebDriver driver = (WebDriver) context.getAttribute("driver");
+            saveTextLog(getTestMethodName(result) + " failed and screenshot taken!");
+            saveScreenshotPNG(driver);
+        }
         //test.fail(MediaEntityBuilder.createScreenCaptureFromBase64String("base64").build());
         //test.log(Status.FAIL, result.getMethod().getMethodName() +
         //" is fail");
-        saveTextLog(getTestMethodName(result) + " failed and screenshot taken!");
+
     }
 
     @Override
