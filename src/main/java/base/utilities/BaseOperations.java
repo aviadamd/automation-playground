@@ -14,7 +14,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import pages.WebUi;
 import base.utilities.config.data.JsonReader;
-import test.GrafanaShared;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
@@ -23,7 +22,6 @@ import java.util.concurrent.TimeUnit;
 @ContextConfiguration(classes = {
         UiActions.class,
         Verfications.class,
-        GrafanaShared.class,
         JsonReader.class
 })
 @ComponentScan(basePackages = {"org.automation.project"})
@@ -32,7 +30,6 @@ public class BaseOperations extends Base {
     public static WebUi webUi;
     @Bean public UiActions uiActions() { return new UiActions(); }
     @Bean public Verfications verfications() { return new Verfications(); }
-    @Bean public GrafanaShared grafanaShared() { return new GrafanaShared();}
     @Bean public JsonReader jsonReader() { return new JsonReader();}
 
     @BeforeClass(description = "before class start action")
