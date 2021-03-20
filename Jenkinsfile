@@ -1,9 +1,13 @@
 pipeline {
     agent any
+    tools {
+       maven "M3"
+    }
     stages {
         stage('SCM checkout') {
              steps {
                 git "https://github.com/aviadamd/automation-playground.git"
+                bat "mvn -Dmaven.test.failure.ignore=true clean package"
              }
         }
         stage('Build Jar') {
@@ -24,6 +28,11 @@ pipeline {
                 dir("target") {
                    bat "java -jar automation-playground.tests.jar"
                 }
+            }
+        }
+        post {
+            success {
+               archiveArtifacts 'target/*.jar'
             }
         }
     }
