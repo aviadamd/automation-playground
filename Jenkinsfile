@@ -25,9 +25,4 @@ pipeline {
             }
         }
     }
-    post {
-       success {
-         mail to: 'aviadamd@gmail.com', subject: 'The Pipeline pass', body:'The Pipeline pass'
-       }
-    }
 }
