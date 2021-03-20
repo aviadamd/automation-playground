@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        TEST_CLASS = "AccountManagementTest"
+        TEST_CLASS
     }
     stages {
         stage('Build Jar') {
