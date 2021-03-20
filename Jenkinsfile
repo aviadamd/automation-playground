@@ -1,7 +1,7 @@
 pipeline {
     agent any
-    params {
-        TEST_CLASS
+    enviroment {
+        TEST_CLASS = ""
     }
     stages {
         stage('Build Jar') {
