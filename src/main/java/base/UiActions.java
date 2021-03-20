@@ -22,7 +22,6 @@ public class UiActions extends BaseOperations {
 
     @Step("perform step action")
     public void perform(String text, BiConsumer<UiActions,Verfications> actionsConsumer) {
-        System.out.println(text);
         log.debug(text);
         actionsConsumer.accept(uiActions(), verfications());
     }
@@ -33,7 +32,7 @@ public class UiActions extends BaseOperations {
             BaseOperations.webDriverWait(10)
                     .until(ExpectedConditions.elementToBeClickable(element));
         } catch (WebDriverException driverException) {
-            log.debug("");
+            log.debug("fail , element is not clickable " + driverException.getMessage());
         }
     }
 
