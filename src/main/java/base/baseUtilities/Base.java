@@ -1,4 +1,4 @@
-package base.utilities;
+package base.baseUtilities;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;

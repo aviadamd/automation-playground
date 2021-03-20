@@ -1,7 +1,7 @@
-package base.utilities;
+package base.baseUtilities;
 
-import base.Verfications;
-import base.UiActions;
+import base.utilities.UiActions;
+import base.utilities.Verfications;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.context.annotation.Bean;

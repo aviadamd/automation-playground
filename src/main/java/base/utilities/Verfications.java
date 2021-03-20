@@ -1,6 +1,6 @@
-package base;
+package base.utilities;
 
-import base.utilities.BaseOperations;
+import base.baseUtilities.BaseOperations;
 import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebElement;

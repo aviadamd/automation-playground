@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="grafana-tests">
     <listeners>
-        <listener class-name = "base.utilities.Listeners"/>
+        <listener class-name = "base.baseUtilities.Listeners"/>
     </listeners>
     <test name= "test suite 1 login test">
         <classes>

@@ -1,6 +1,6 @@
 package test.grafana;
 
-import base.utilities.BaseOperations;
+import base.baseUtilities.BaseOperations;
 import io.qameta.allure.Step;
 
 public class GrafanaShared extends BaseOperations {

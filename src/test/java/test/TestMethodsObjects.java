@@ -1,6 +1,6 @@
 package test;
 
-import base.utilities.BaseOperations;
+import base.baseUtilities.BaseOperations;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.ContextConfiguration;
 import test.grafana.GrafanaShared;

@@ -2,7 +2,7 @@ package test.grafana;
 
 import io.qameta.allure.Description;
 import org.testng.annotations.Test;
-import base.utilities.Listeners;
+import base.baseUtilities.Listeners;
 import test.TestMethodsObjects;
 
 @org.testng.annotations.Listeners({Listeners.class})

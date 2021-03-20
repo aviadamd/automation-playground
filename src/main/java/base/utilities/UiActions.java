@@ -1,8 +1,9 @@
-package base;
+package base.utilities;
 
-import base.utilities.BaseOperations;
+import base.baseUtilities.BaseOperations;
 import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -97,6 +98,19 @@ public class UiActions extends BaseOperations {
         } catch (IOException ioException) {
             log.debug(ioException.getMessage());
         }
+    }
+
+    public JavascriptExecutor getJavascriptExecutor() {
+        return ((JavascriptExecutor) driver);
+    }
+
+    public void executeUsingJavaScript(String executionScript, WebElement element) {
+        ((JavascriptExecutor) driver).executeScript(executionScript, element);
+    }
+
+    public void clear(WebElement element) {
+        click(element);
+        element.clear();
     }
 
 }
