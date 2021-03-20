@@ -1,10 +1,8 @@
 package base.utilities;
 
 import base.baseUtilities.BaseOperations;
-import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -42,19 +40,28 @@ public class UiActions extends BaseOperations {
     public void click(WebElement element) {
         try {
             elementToBeClickable(element);
-            log.debug("click on " + element);
+            log.debug("click on " + element.getText());
             element.click();
         } catch (WebDriverException  driverException) {
             Assert.fail("Fail click ", driverException);
         }
     }
 
-    @Step("verify is {0} element is presented")
-    public boolean elementPresented(WebElement element) {
+    @Step("click action on {0} element")
+    public void clickOptional(WebElement element) {
         try {
-            BaseOperations.webDriverWait(10)
+            if (elementPresented(element,5)) element.click();
+        } catch (WebDriverException  driverException) {
+            log.debug(element.toString() + " not presented");
+        }
+    }
+
+    @Step("verify is {0} element is presented")
+    public boolean elementPresented(WebElement element, int timeOut) {
+        try {
+            BaseOperations.webDriverWait(timeOut)
                     .until(ExpectedConditions.visibilityOf(element));
-            log.debug(element + " is visible");
+            log.debug(element.getText() + " is visible");
             return true;
         } catch (WebDriverException e) {
             log.debug(element.toString() + " not presented");
@@ -65,9 +72,9 @@ public class UiActions extends BaseOperations {
     @Step("send {1} keys to element {0}")
     public void sendKeys(WebElement element, String text) {
         try {
-            elementToBeClickable(element);
+            clickOptional(element);
             element.sendKeys(text);
-            log.debug("Send " + text + " to " + element);
+            log.debug("Send " + text + " to " + element.getText());
         } catch (WebDriverException driverException) {
             Assert.fail("Fail send keys ", driverException);
         }
@@ -82,7 +89,7 @@ public class UiActions extends BaseOperations {
 
     @Step("mouse over elements")
     public void mouseHoverElements(WebElement element1, WebElement element2) {
-        elementPresented(element1);
+        elementPresented(element1,5);
         Actions actions = new Actions(driver);
         actions.moveToElement(element1).moveToElement(element2)
                 .click().build().perform();

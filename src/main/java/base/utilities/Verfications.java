@@ -16,12 +16,13 @@ public class Verfications extends BaseOperations {
     @Step("load page or elements")
     public void load(ArrayList<WebElement> elements) {
         for (WebElement pageEle : elements) {
-            uiActions().elementPresented(pageEle);
+            uiActions().elementPresented(pageEle,5);
         }
     }
 
     @Step("load page or single element")
     public void load(WebElement element) {
+
         load(new ArrayList<>(Collections.singleton(element)));
     }
 

@@ -1,16 +1,16 @@
 package pages;
 
 import org.openqa.selenium.WebDriver;
-import pages.accountManagement.Login;
+import pages.accountManagement.AccountManagementLoginPage;
 import pages.grafana.GrafanaLoginPage;
 
 public class WebUi {
 
     public GrafanaLoginPage grafanaLoginPage;
-    public Login login;
+    public AccountManagementLoginPage accountManagementLoginPage;
 
     public WebUi(WebDriver driver) {
         this.grafanaLoginPage = new GrafanaLoginPage(driver);
-        this.login = new Login(driver);
+        this.accountManagementLoginPage = new AccountManagementLoginPage(driver);
     }
 }

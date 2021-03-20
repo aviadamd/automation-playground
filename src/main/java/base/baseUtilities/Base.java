@@ -8,6 +8,7 @@ import io.appium.java_client.service.local.flags.GeneralServerFlag;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import ru.yandex.qatools.ashot.Screenshot;
@@ -17,6 +18,7 @@ import base.utilities.config.data.JsonReader;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 public class Base {
@@ -58,8 +60,10 @@ public class Base {
         return capabilities;
     }
 
-    protected static WebDriver initChromeDriver() {
+    protected static WebDriver initChromeDriver(ChromeOptions options) {
         WebDriverManager.chromedriver().setup();
+        if (Optional.ofNullable(options).isPresent())
+            return new ChromeDriver(options);
         return new ChromeDriver();
     }
 

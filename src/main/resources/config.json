@@ -5,6 +5,12 @@
       "platform": "web",
       "typeFromPlatform": "chrome",
       "url": "http://localhost:3000/"
+    },
+    {
+      "key": 1,
+      "platform": "web",
+      "typeFromPlatform": "chrome",
+      "url": "https://www.bankhapoalim.co.il/he/login"
     }
   ]
 }

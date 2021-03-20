@@ -43,14 +43,17 @@ public class JavaScriptUtil extends BaseOperations {
   }
 
   public void generateAlert(String message) {
+
     getJavascriptExecutor().executeScript("alert('" + message + "')");
   }
 
   public void clickElementByJS(WebElement element) {
+
     executeUsingJavaScript("arguments[0].click();", element);
   }
 
   public void refreshBrowserByJS() {
+
     getJavascriptExecutor().executeScript("history.go(0)");
   }
 
