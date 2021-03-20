@@ -6,5 +6,18 @@ pipeline {
                 bat "mvn clean package -DskipTests"
             }
         }
+        stage('Run Tests') {
+            steps {
+                bat "mvn clean test"
+            }
+        }
+    }
+    post {
+       always {
+          junit 'target/surefire-reports/TEST-*.xml'
+       }
+       failure {
+         mail to: 'aviadamd@gmail.com', subject: 'The Pipeline pass :(', body:'The Pipeline pass'
+       }
     }
 }
