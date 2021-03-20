@@ -1,11 +1,12 @@
-package test;
+package test.grafana;
 
 import io.qameta.allure.Description;
 import org.testng.annotations.Test;
 import base.utilities.Listeners;
+import test.TestMethodsObjects;
 
 @org.testng.annotations.Listeners({Listeners.class})
-public class GrafanaLoginTest extends GrafanaShared {
+public class GrafanaLoginTest extends TestMethodsObjects {
 
     @Test(description = "test 01 : login to grafana")
     @Description("login to grafana with valid user name and pass word")
