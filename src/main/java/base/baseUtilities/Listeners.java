@@ -15,12 +15,12 @@ public class Listeners extends BaseOperations implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-        log.debug("onTestStart method " + getTestMethodName(iTestResult) + " start");
+        log.debug("test start method " + getTestMethodName(iTestResult) + " start");
     }
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-        log.debug("onTestSuccess method " + getTestMethodName(iTestResult) + " succeed");
+        log.debug("test success method " + getTestMethodName(iTestResult) + " succeed");
     }
 
     @Override

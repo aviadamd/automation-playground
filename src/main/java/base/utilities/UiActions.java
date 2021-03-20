@@ -1,6 +1,7 @@
 package base.utilities;
 
 import base.baseUtilities.BaseOperations;
+import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.JavascriptExecutor;
@@ -27,7 +28,7 @@ public class UiActions extends BaseOperations {
         actionsConsumer.accept(uiActions(), verfications());
     }
 
-    @Step("verify element clickable")
+    @Step("verify element {0} is clickable")
     public void elementToBeClickable(WebElement element) {
         try {
             BaseOperations.webDriverWait(10)
@@ -37,7 +38,7 @@ public class UiActions extends BaseOperations {
         }
     }
 
-    @Step("click action on { element }")
+    @Step("click action on {0} element")
     public void click(WebElement element) {
         try {
             elementToBeClickable(element);
@@ -48,7 +49,7 @@ public class UiActions extends BaseOperations {
         }
     }
 
-    @Step("verify is element presented")
+    @Step("verify is {0} element is presented")
     public boolean elementPresented(WebElement element) {
         try {
             BaseOperations.webDriverWait(10)
@@ -61,7 +62,7 @@ public class UiActions extends BaseOperations {
         }
     }
 
-    @Step("send keys to element")
+    @Step("send {1} keys to element {0}")
     public void sendKeys(WebElement element, String text) {
         try {
             elementToBeClickable(element);
@@ -98,14 +99,6 @@ public class UiActions extends BaseOperations {
         } catch (IOException ioException) {
             log.debug(ioException.getMessage());
         }
-    }
-
-    public JavascriptExecutor getJavascriptExecutor() {
-        return ((JavascriptExecutor) driver);
-    }
-
-    public void executeUsingJavaScript(String executionScript, WebElement element) {
-        ((JavascriptExecutor) driver).executeScript(executionScript, element);
     }
 
     public void clear(WebElement element) {
