@@ -14,7 +14,7 @@ pipeline {
     }
     post {
        always {
-          junit 'target/surefire-reports/TEST-*.xml'
+          testng 'target/surefire-reports/TEST-*.xml'
        }
        failure {
          mail to: 'aviadamd@gmail.com', subject: 'The Pipeline pass :(', body:'The Pipeline pass'
