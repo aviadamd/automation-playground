@@ -25,12 +25,9 @@ public class Listeners extends BaseOperations implements ITestListener {
     @Override
     public void onTestFailure(ITestResult result) {
         log.debug("fail " + result.getName());
-        if (driver != null) {
-            ITestContext context = result.getTestContext();
-            WebDriver driver = (WebDriver) context.getAttribute("driver");
-            saveTextLog(getTestMethodName(result) + " failed and screenshot taken!");
-            saveScreenshotPNG(driver);
-        }
+        saveTextLog(getTestMethodName(result) + " failed and screenshot taken!");
+        saveScreenshotPNG(driver);
+
         //test.fail(MediaEntityBuilder.createScreenCaptureFromBase64String("base64").build());
         //test.log(Status.FAIL, result.getMethod().getMethodName() +
         //" is fail");

@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    params {
+        TEST_CLASS
+    }
     stages {
         stage('Build Jar') {
             steps {
@@ -8,7 +11,7 @@ pipeline {
         }
         stage('Run Tests') {
             steps {
-                bat "mvn test -PAccountManagementLoginTest"
+                bat "mvn test -P"$TEST_CLASS"
                 //bat "mvn clean test"
             }
         }
