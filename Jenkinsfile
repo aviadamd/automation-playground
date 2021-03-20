@@ -8,7 +8,8 @@ pipeline {
         }
         stage('Run Tests') {
             steps {
-                bat "mvn clean test"
+                bat "mvn test -PAccountManagementLoginTest"
+                //bat "mvn clean test"
             }
         }
     }
