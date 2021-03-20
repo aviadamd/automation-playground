@@ -32,7 +32,7 @@ public class UiActions extends BaseOperations {
         try {
             BaseOperations.webDriverWait(10)
                     .until(ExpectedConditions.elementToBeClickable(element));
-        } catch (WebDriverException  driverException) {
+        } catch (WebDriverException driverException) {
             log.debug("");
         }
     }
@@ -82,7 +82,8 @@ public class UiActions extends BaseOperations {
     @Step("mouse over elements")
     public void mouseHoverElements(WebElement element1, WebElement element2) {
         elementPresented(element1);
-        new Actions(driver).moveToElement(element1).moveToElement(element2)
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element1).moveToElement(element2)
                 .click().build().perform();
     }
 

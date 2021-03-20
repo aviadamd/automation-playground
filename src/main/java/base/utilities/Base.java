@@ -1,8 +1,5 @@
 package base.utilities;
 
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
@@ -29,9 +26,9 @@ public class Base {
     public static Screenshot imageScreenShot;
     public static ImageDiff imageDiff;
     public ImageDiffer imageDiffer = new ImageDiffer();
-    public static ExtentSparkReporter spark;
-    public static ExtentReports extent;
-    public static ExtentTest test;
+    //public static ExtentSparkReporter spark;
+    //public static ExtentReports extent;
+    //public static ExtentTest test;
 
     protected static WebDriver startAppiumServer() {
         HashMap<String, String> environment = new HashMap<>();

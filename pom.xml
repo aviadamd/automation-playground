@@ -96,11 +96,6 @@
             <artifactId>spring-web</artifactId>
             <version>5.2.3.RELEASE</version>
         </dependency>
-        <dependency>
-            <groupId>com.aventstack</groupId>
-            <artifactId>extentreports</artifactId>
-            <version>5.0.5</version>
-        </dependency>
     </dependencies>
 
     <build>
@@ -129,20 +124,8 @@
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
-                <configuration>
-                    <compilerVersion>1.8</compilerVersion>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <testSource>1.8</testSource>
-                    <testTarget>1.8</testTarget>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.1.2</version>
                 <executions>
                     <execution>
                         <id>copy-dependencies</id>
@@ -158,10 +141,11 @@
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.1.2</version>
                 <executions>
                     <execution>
                         <goals>
@@ -170,6 +154,7 @@
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
     </build>
 
