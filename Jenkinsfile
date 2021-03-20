@@ -11,6 +11,7 @@ pipeline {
         }
         stage('Run Tests') {
             steps {
+                echo "TEST_CLASS =${env.TEST_CLASS}"
                 bat "mvn test -P"$TEST_CLASS""
                 //bat "mvn clean test"
             }
