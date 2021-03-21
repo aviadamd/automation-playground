@@ -11,6 +11,6 @@ public class AccountManagementTest extends TestMethodsObjects {
     @Test(description = "test 01 : login to account management")
     @Description("login to account management with valid user name and pass word")
     public void test01_login() {
-        accountManagementShared().login("admin", "5311072BsDvir");
+        accountManagementShared().login("!wiz1017", "!bl123456");
     }
 }

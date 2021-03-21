@@ -3,6 +3,8 @@ package base.baseUtilities;
 import base.utilities.JavaScriptUtil;
 import base.utilities.UiActions;
 import base.utilities.Verfications;
+import base.utilities.config.data.Properties;
+import base.utilities.config.objects.SharedObjects;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
@@ -10,10 +12,13 @@ import io.qameta.allure.Story;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.stereotype.Component;
 import org.springframework.test.context.ContextConfiguration;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -24,18 +29,11 @@ import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
-@Configuration
-@EnableAspectJAutoProxy
-@ContextConfiguration(classes = {
-        UiActions.class,
-        Verfications.class,
-        JavaScriptUtil.class,
-        JsonReader.class
-})
-@ComponentScan(basePackages = {"org.automation.project"})
 public class BaseOperations extends Base {
 
     public static WebUi webUi;
+
+    @Bean public Properties properties() { return new Properties(); }
     @Bean public UiActions uiActions() { return new UiActions(); }
     @Bean public Verfications verfications() { return new Verfications(); }
     @Bean public JavaScriptUtil jsUtil() { return new JavaScriptUtil(); }

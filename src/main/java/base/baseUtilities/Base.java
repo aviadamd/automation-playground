@@ -1,16 +1,29 @@
 package base.baseUtilities;
 
+import base.utilities.JavaScriptUtil;
+import base.utilities.UiActions;
+import base.utilities.Verfications;
+import base.utilities.config.data.Properties;
+import base.utilities.config.objects.SharedObjects;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.GeneralServerFlag;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.stereotype.Component;
+import org.springframework.test.context.ContextConfiguration;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 import ru.yandex.qatools.ashot.comparison.ImageDiffer;
@@ -21,9 +34,27 @@ import java.util.HashMap;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
+@Slf4j
+@Component
+@Configuration
+@SpringBootApplication
+@EnableAspectJAutoProxy
+@ContextConfiguration(classes = {
+  //      base.utilities.config.objects.SharedObjects.class,
+        UiActions.class,
+        Verfications.class,
+        JavaScriptUtil.class,
+        JsonReader.class,
+        Properties.class
+})
+//@ComponentScan(basePackages = {"org.automation.project"})
 public class Base {
 
     public static WebDriver driver;
+    //@Autowired public SharedObjects sharedObjects;
+   // @Bean public SharedObjects sharedObjects() {
+     //   return new SharedObjects();
+   // }
     public static AppiumDriverLocalService server;
     public static Screenshot imageScreenShot;
     public static ImageDiff imageDiff;
