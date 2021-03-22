@@ -12,7 +12,7 @@ public class AccountManagementTest extends TestMethodsObjects {
 
     @Test(description = "test 01 : login to account management")
     @Description("login to account management with valid user name and pass word")
-    public void test01_login() {
-        log.debug("print form " + AccountManagementTest.class.getName());
+    public void printMethod() {
+        log.debug("print form here");
     }
 }
