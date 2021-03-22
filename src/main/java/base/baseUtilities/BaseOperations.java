@@ -4,22 +4,14 @@ import base.utilities.JavaScriptUtil;
 import base.utilities.UiActions;
 import base.utilities.Verfications;
 import base.utilities.config.data.Properties;
-import base.utilities.config.objects.SharedObjects;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.stereotype.Component;
-import org.springframework.test.context.ContextConfiguration;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -29,15 +21,15 @@ import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
+@EnableAspectJAutoProxy
 public class BaseOperations extends Base {
 
     public static WebUi webUi;
-
-    @Bean public Properties properties() { return new Properties(); }
-    @Bean public UiActions uiActions() { return new UiActions(); }
-    @Bean public Verfications verfications() { return new Verfications(); }
-    @Bean public JavaScriptUtil jsUtil() { return new JavaScriptUtil(); }
-    @Bean public JsonReader jsonReader() { return new JsonReader();}
+    public Properties properties() { return new Properties(); }
+    public UiActions uiActions() { return new UiActions(); }
+    public Verfications verfications() { return new Verfications(); }
+    public JavaScriptUtil jsUtil() { return new JavaScriptUtil(); }
+    public JsonReader jsonReader() { return new JsonReader();}
 
     @Severity(SeverityLevel.BLOCKER)
     @Story("init web driver with base url")
@@ -69,6 +61,7 @@ public class BaseOperations extends Base {
 
     @AfterClass(description = "quit sessions")
     public void closeSession() {
+        if (driver == null) throw new WebDriverException("cannot reach driver");
         String getPlatform = jsonReader().jsonData(1).platform;
         switch (getPlatform) {
             case "web":
@@ -80,11 +73,6 @@ public class BaseOperations extends Base {
                 driver.quit();
                 break;
         }
-    }
-
-    public static WebDriverWait webDriverWait(int timeOut) {
-
-        return new WebDriverWait(driver, timeOut);
     }
 
     @Description("init web browser with {0} url")

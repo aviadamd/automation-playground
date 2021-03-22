@@ -3,8 +3,10 @@ package base.utilities;
 import base.baseUtilities.BaseOperations;
 import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.util.ArrayList;
@@ -28,9 +30,15 @@ public class Verfications extends BaseOperations {
 
     @Step("verify number of elements within page or element")
     public void verifyNumberOfElements(ArrayList<WebElement> elements, int numbers) {
-        webDriverWait(10)
-                .until(ExpectedConditions.visibilityOf(elements.get(elements.size() -1)));
-        Assert.assertEquals(elements.size(), numbers);
+        try {
+            WebDriverWait webDriverWait = new WebDriverWait(driver,10);
+            webDriverWait.until(
+                    ExpectedConditions.visibilityOf(elements.get(elements.size() -1)));
+            Assert.assertEquals(elements.size(), numbers);
+        } catch (WebDriverException webDriverException) {
+            log.debug(webDriverException.getMessage());
+            Assert.fail(webDriverException.getMessage());
+        }
     }
 
     @Step("compere texts")

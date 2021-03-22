@@ -3,11 +3,13 @@ package base.utilities;
 import base.baseUtilities.BaseOperations;
 import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.NoSuchWindowException;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider;
@@ -29,8 +31,8 @@ public class UiActions extends BaseOperations {
     @Step("verify element {0} is clickable")
     public void elementToBeClickable(WebElement element) {
         try {
-            BaseOperations.webDriverWait(10)
-                    .until(ExpectedConditions.elementToBeClickable(element));
+            WebDriverWait webDriverWait = new WebDriverWait(driver,10);
+            webDriverWait.until(ExpectedConditions.elementToBeClickable(element));
         } catch (WebDriverException driverException) {
             log.debug("fail , element is not clickable " + driverException.getMessage());
         }
@@ -59,8 +61,8 @@ public class UiActions extends BaseOperations {
     @Step("verify is {0} element is presented")
     public boolean elementPresented(WebElement element, int timeOut) {
         try {
-            BaseOperations.webDriverWait(timeOut)
-                    .until(ExpectedConditions.visibilityOf(element));
+            WebDriverWait webDriverWait = new WebDriverWait(driver,timeOut);
+            webDriverWait.until(ExpectedConditions.visibilityOf(element));
             log.debug(element.getText() + " is visible");
             return true;
         } catch (WebDriverException e) {
