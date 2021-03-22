@@ -10,8 +10,8 @@ pipeline {
             steps {
                 echo "TEST_CLASS = ${env.TEST_CLASS}"
                 echo "TEST_CLASS = $TEST_CLASS"
-                //bat 'mvn test -P${env.TEST_CLASS}'
-                 bat 'mvn clean install'
+                //bat "mvn test -P${env.TEST_CLASS}"
+                 bat "mvn clean test -Dtest=${env.TEST_CLASS}"
             }
         }
     }
