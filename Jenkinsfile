@@ -3,14 +3,13 @@ pipeline {
     stages {
         stage('Build Jar') {
             steps {
-                //bat "mvn clean package -DskipTests"
-                bat "echo start"
+                bat "mvn clean package -DskipTests"
             }
         }
         stage('Run Tests') {
             steps {
-                echo "TEST_CLASS = ${env.TEST_CLASS}"
-                echo "TEST_CLASS = $TEST_CLASS"
+                //echo "TEST_CLASS = ${env.TEST_CLASS}"
+                //echo "TEST_CLASS = $TEST_CLASS"
                 //bat "mvn test -P${env.TEST_CLASS}"
                  bat "mvn clean test -Dtest=${env.TEST_CLASS}"
             }
