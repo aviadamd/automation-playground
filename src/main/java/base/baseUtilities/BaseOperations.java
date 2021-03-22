@@ -37,13 +37,14 @@ public class BaseOperations extends Base {
         switch (getPlatform) {
             case "web" :
                 initWebBrowser(jsonReader().jsonData(1).url);
-                webUi = new WebUi(driver);
+
                 break;
             case "mobile" :
                 initApplication();
                 break;
         }
         log.debug("init " + getPlatform + " platform");
+        webUi = new WebUi(driver);
     }
 
     @AfterMethod(description = "after method return to base test url")
