@@ -1,4 +1,4 @@
-package base.utilities.config.data;
+package base.utilities.config;
 
 import com.google.gson.annotations.SerializedName;
 

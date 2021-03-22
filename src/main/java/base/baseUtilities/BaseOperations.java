@@ -3,7 +3,6 @@ package base.baseUtilities;
 import base.utilities.JavaScriptUtil;
 import base.utilities.UiActions;
 import base.utilities.Verfications;
-import base.utilities.config.data.Properties;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
@@ -16,7 +15,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import pages.WebUi;
-import base.utilities.config.data.JsonReader;
+import base.utilities.config.JsonReader;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
@@ -25,11 +24,10 @@ import java.util.concurrent.TimeUnit;
 public class BaseOperations extends Base {
 
     public static WebUi webUi;
-    public Properties properties() { return new Properties(); }
+    public JsonReader jsonReader() { return new JsonReader();}
     public UiActions uiActions() { return new UiActions(); }
     public Verfications verfications() { return new Verfications(); }
     public JavaScriptUtil jsUtil() { return new JavaScriptUtil(); }
-    public JsonReader jsonReader() { return new JsonReader();}
 
     @Severity(SeverityLevel.BLOCKER)
     @Story("init web driver with base url")
@@ -39,13 +37,13 @@ public class BaseOperations extends Base {
         switch (getPlatform) {
             case "web" :
                 initWebBrowser(jsonReader().jsonData(1).url);
+                webUi = new WebUi(driver);
                 break;
             case "mobile" :
                 initApplication();
                 break;
         }
         log.debug("init " + getPlatform + " platform");
-        webUi = new WebUi(driver);
     }
 
     @AfterMethod(description = "after method return to base test url")
