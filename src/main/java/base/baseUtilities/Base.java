@@ -7,6 +7,7 @@ import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.GeneralServerFlag;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -16,29 +17,39 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 import ru.yandex.qatools.ashot.comparison.ImageDiffer;
-
 import java.io.File;
+import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
 public class Base {
 
     public static WebDriver driver;
+    public static Properties prop;
     public static AppiumDriverLocalService server;
     public static Screenshot imageScreenShot;
     public static ImageDiff imageDiff;
     public ImageDiffer imageDiffer = new ImageDiffer();
 
+    @SneakyThrows
+    public Base() {
+        prop = new Properties();
+        final String path = "/src/main/resources/config.properties";
+        FileInputStream ip = new FileInputStream(System.getProperty("user.dir") + path);
+        prop.load(ip);
+    }
+
     protected static WebDriver startAppiumServer() {
         HashMap<String, String> environment = new HashMap<>();
-        environment.put("PATH", new JsonReader().jsonPath(0).localBin + System.getenv("PATH"));
-        environment.put("ANDROID_HOME", new JsonReader().jsonPath(0).androidSdk);
+        environment.put("PATH", prop.getProperty("localBin") + System.getenv("PATH"));
+        environment.put("ANDROID_HOME", prop.getProperty("androidSdk"));
 
         DesiredCapabilities capabilities = initCapabilities();
         server = AppiumDriverLocalService.buildService(new AppiumServiceBuilder()
-                .usingDriverExecutable(new File(new JsonReader().jsonPath(0).nodeJs))
+                .usingDriverExecutable(new File(prop.getProperty("nodeJs")))
                 .usingAnyFreePort()
                 .withArgument(GeneralServerFlag.SESSION_OVERRIDE)
                 .withArgument(GeneralServerFlag.LOG_LEVEL, "error")

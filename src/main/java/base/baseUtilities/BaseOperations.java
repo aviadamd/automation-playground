@@ -33,10 +33,10 @@ public class BaseOperations extends Base {
     @Story("init web driver with base url")
     @BeforeClass(description = "before class start action")
     public void startSession() {
-        String getPlatform = jsonReader().jsonData(1).platform;
+        String getPlatform = prop.getProperty("platform");
         switch (getPlatform) {
             case "web" :
-                initWebBrowser(jsonReader().jsonData(1).url);
+                initWebBrowser(prop.getProperty("url"));
                 break;
             case "mobile" :
                 initApplication();
@@ -46,9 +46,9 @@ public class BaseOperations extends Base {
         webUi = new WebUi(driver);
     }
 
-    @AfterMethod(description = "after method return to base test url")
+    @AfterMethod(description = "after method")
     public void afterMethod() {
-        String getPlatform = jsonReader().jsonData(0).platform;
+        String getPlatform = prop.getProperty("platform");
         switch (getPlatform) {
             case "web":
                 log.info("w");
@@ -62,7 +62,7 @@ public class BaseOperations extends Base {
     @AfterClass(description = "quit sessions")
     public void closeSession() {
         if (driver == null) throw new WebDriverException("cannot reach driver");
-        String getPlatform = jsonReader().jsonData(1).platform;
+        String getPlatform = prop.getProperty("platform");
         switch (getPlatform) {
             case "web":
                 driver.close();
@@ -77,18 +77,9 @@ public class BaseOperations extends Base {
 
     @Description("init web browser with {0} url")
     private void initWebBrowser(String url) {
-        String browser = jsonReader().jsonData(1).typeFromPlatform;
+        String browser = prop.getProperty("typeFromPlatform");
         switch (browser) {
             case "chrome":
-//                BrowserMobProxyServer proxyServer = new BrowserMobProxyServer();
-//                proxyServer.setTrustAllServers(true);
-//                proxyServer.enableHarCaptureTypes(
-//                        CaptureType.REQUEST_HEADERS,CaptureType.REQUEST_CONTENT,
-//                        CaptureType.REQUEST_BINARY_CONTENT,CaptureType.REQUEST_COOKIES,
-//                        CaptureType.RESPONSE_HEADERS,CaptureType.RESPONSE_CONTENT,
-//                        CaptureType.RESPONSE_BINARY_CONTENT,CaptureType.RESPONSE_COOKIES
-//                );
-//                proxyServer.start();
                 driver = Base.initChromeDriver(disableBeforeLaunch());
                 break;
             case "safari":
@@ -102,7 +93,7 @@ public class BaseOperations extends Base {
     }
 
     private void initApplication() {
-        String application = jsonReader().jsonData(0).typeFromPlatform;
+        String application = prop.getProperty("typeFromPlatform");
         if (application.equals("appium"))
             driver = Base.startAppiumServer();
         else throw new IllegalArgumentException("provide valid application driver type");
