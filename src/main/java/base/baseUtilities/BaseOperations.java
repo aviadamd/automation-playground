@@ -15,7 +15,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import pages.WebUi;
-import base.utilities.config.JsonReader;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
@@ -24,7 +23,6 @@ import java.util.concurrent.TimeUnit;
 public class BaseOperations extends Base {
 
     public static WebUi webUi;
-    public JsonReader jsonReader() { return new JsonReader();}
     public UiActions uiActions() { return new UiActions(); }
     public Verfications verfications() { return new Verfications(); }
     public JavaScriptUtil jsUtil() { return new JavaScriptUtil(); }
