@@ -1,6 +1,5 @@
 package base.baseUtilities;
 
-import base.utilities.config.JsonReader;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
@@ -14,6 +13,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 import ru.yandex.qatools.ashot.comparison.ImageDiffer;
@@ -24,7 +25,6 @@ import java.util.Optional;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-@Slf4j
 public class Base {
 
     public static WebDriver driver;
@@ -33,6 +33,7 @@ public class Base {
     public static Screenshot imageScreenShot;
     public static ImageDiff imageDiff;
     public ImageDiffer imageDiffer = new ImageDiffer();
+    public static final Logger log = LoggerFactory.getLogger(Base.class);
 
     @SneakyThrows
     public Base() {
