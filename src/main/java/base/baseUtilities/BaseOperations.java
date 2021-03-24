@@ -8,7 +8,7 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.testng.annotations.AfterClass;
@@ -37,7 +37,6 @@ public class BaseOperations extends Base {
         switch (getPlatform) {
             case "web" :
                 initWebBrowser(jsonReader().jsonData(1).url);
-
                 break;
             case "mobile" :
                 initApplication();
@@ -52,8 +51,10 @@ public class BaseOperations extends Base {
         String getPlatform = jsonReader().jsonData(0).platform;
         switch (getPlatform) {
             case "web":
+                log.info("w");
                 break;
             case "mobile":
+                log.info("m");
                 break;
         }
     }
@@ -79,12 +80,16 @@ public class BaseOperations extends Base {
         String browser = jsonReader().jsonData(1).typeFromPlatform;
         switch (browser) {
             case "chrome":
-                ChromeOptions options = new ChromeOptions();
-                options.addArguments("disable-extensions");
-                options.addArguments("disable-popup-blocking");
-                options.addArguments("disable-infobars");
-                options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
-                driver = Base.initChromeDriver(options);
+//                BrowserMobProxyServer proxyServer = new BrowserMobProxyServer();
+//                proxyServer.setTrustAllServers(true);
+//                proxyServer.enableHarCaptureTypes(
+//                        CaptureType.REQUEST_HEADERS,CaptureType.REQUEST_CONTENT,
+//                        CaptureType.REQUEST_BINARY_CONTENT,CaptureType.REQUEST_COOKIES,
+//                        CaptureType.RESPONSE_HEADERS,CaptureType.RESPONSE_CONTENT,
+//                        CaptureType.RESPONSE_BINARY_CONTENT,CaptureType.RESPONSE_COOKIES
+//                );
+//                proxyServer.start();
+                driver = Base.initChromeDriver(disableBeforeLaunch());
                 break;
             case "safari":
                 driver = Base.initFireFoxDriver();
@@ -104,13 +109,25 @@ public class BaseOperations extends Base {
         log.debug("init " + application + " type platform");
     }
 
-    private HashMap<String,Object> extensions() {
+    public ChromeOptions disableBeforeLaunch() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("disable-extensions");
+        options.addArguments("disable-popup-blocking");
+        options.addArguments("disable-infobars");
+        options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+        return options;
+    }
+
+    private ChromeOptions setCookiesConfig(int setValue) {
         HashMap<String, Object> prefs = new HashMap<>();
-        prefs.put("profile.default_content_setting_values.cookies", 1);
-        prefs.put("network.cookie.cookieBehavior", 1);
-        prefs.put("profile.block_third_party_cookies", false);
+        //1 - enable , 2 - disable
+        prefs.put("profile.default_content_setting_values.cookies",setValue);
+        prefs.put("network.cookie.cookieBehavior",setValue);
+        if (setValue == 1)
+             prefs.put("profile.block_third_party_cookies", true);
+        else prefs.put("profile.block_third_party_cookies", false);
         ChromeOptions options = new ChromeOptions();
         options.setExperimentalOption("prefs", prefs);
-        return prefs;
+        return options;
     }
 }

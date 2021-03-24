@@ -1,5 +1,6 @@
 package base.baseUtilities;
 
+import base.utilities.config.JsonReader;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
@@ -15,7 +16,6 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 import ru.yandex.qatools.ashot.comparison.ImageDiffer;
-import base.utilities.config.JsonReader;
 
 import java.io.File;
 import java.util.HashMap;
@@ -30,9 +30,6 @@ public class Base {
     public static Screenshot imageScreenShot;
     public static ImageDiff imageDiff;
     public ImageDiffer imageDiffer = new ImageDiffer();
-    //public static ExtentSparkReporter spark;
-    //public static ExtentReports extent;
-    //public static ExtentTest test;
 
     protected static WebDriver startAppiumServer() {
         HashMap<String, String> environment = new HashMap<>();
@@ -73,4 +70,5 @@ public class Base {
         WebDriverManager.firefoxdriver().setup();
         return new FirefoxDriver();
     }
+
 }

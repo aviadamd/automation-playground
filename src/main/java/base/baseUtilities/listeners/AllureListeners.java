@@ -1,5 +1,7 @@
-package base.baseUtilities;
+package base.baseUtilities.listeners;
 
+import base.baseUtilities.BaseOperations;
+import com.aventstack.extentreports.ExtentTest;
 import io.qameta.allure.Attachment;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.OutputType;
@@ -10,7 +12,7 @@ import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 @Slf4j
-public class Listeners extends BaseOperations implements ITestListener {
+public class AllureListeners extends BaseOperations implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
@@ -27,18 +29,11 @@ public class Listeners extends BaseOperations implements ITestListener {
         log.debug("fail " + result.getName());
         saveTextLog(getTestMethodName(result) + " failed and screenshot taken!");
         saveScreenshotPNG(driver);
-
-        //test.fail(MediaEntityBuilder.createScreenCaptureFromBase64String("base64").build());
-        //test.log(Status.FAIL, result.getMethod().getMethodName() +
-        //" is fail");
-
     }
 
     @Override
     public void onTestSkipped(ITestResult result) {
         log.debug("skip " + result.getName());
-        //test.log(Status.SKIP, result.getMethod().getMethodName() +
-        //      " is skip");
     }
 
     @Override
@@ -48,24 +43,12 @@ public class Listeners extends BaseOperations implements ITestListener {
 
     @Override
     public void onStart(ITestContext context) {
-        //extent = new ExtentReports();
-        //spark = new ExtentSparkReporter("target/Spark.html");
-        //extent.attachReporter(spark);
-        //test = extent.createTest(context.getName());
         log.debug("start " + context.getName());
-        //extent.setSystemInfo("os", "winos");
     }
 
     @Override
     public void onFinish(ITestContext context) {
-        //extent.flush();
         log.debug("finish tests " + context.getName());
-    }
-
-    @Attachment(value = "page screen shot", type = "image/png")
-    public byte[] saveScreenShots() {
-        return ((TakesScreenshot) driver)
-                .getScreenshotAs(OutputType.BYTES);
     }
 
     // Image attachment for Allure
@@ -77,7 +60,6 @@ public class Listeners extends BaseOperations implements ITestListener {
     // Text attachments for Allure
     @Attachment(value = "{0}", type = "text/plain")
     public static String saveTextLog(String message) {
-
         return message;
     }
 

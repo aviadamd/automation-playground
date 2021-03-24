@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="account-management-tests">
     <listeners>
-        <listener class-name = "base.baseUtilities.Listeners"/>
+        <listener class-name = "base.baseUtilities.listeners.AllureListeners"/>
     </listeners>
     <test name= "test suite 1 login test">
         <classes>
