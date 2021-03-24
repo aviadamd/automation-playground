@@ -1,6 +1,6 @@
 package base.baseUtilities.listeners;
 
-import base.baseUtilities.Base;
+import base.baseUtilities.BaseOperations;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
@@ -20,11 +20,10 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
-
 import static com.aventstack.extentreports.MediaEntityBuilder.createScreenCaptureFromBase64String;
 
 @Slf4j
-public class ExtentReportListener extends Base implements ITestListener {
+public class ExtentReportListener extends BaseOperations implements ITestListener {
 
     public static ExtentSparkReporter spark;
     public static ExtentReports extent;

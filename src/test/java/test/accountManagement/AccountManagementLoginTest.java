@@ -1,7 +1,6 @@
 package test.accountManagement;
 
 import base.baseUtilities.listeners.AllureListeners;
-import base.baseUtilities.listeners.ExtentReportListener;
 import io.qameta.allure.Description;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
