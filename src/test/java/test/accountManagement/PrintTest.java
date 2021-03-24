@@ -12,6 +12,6 @@ public class PrintTest {
     @Test(description = "test 01 : print test")
     @Description("print test")
     public void printMethod() {
-        log.info("print form here");
+        log.debug("print form here");
     }
 }
