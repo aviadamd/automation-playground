@@ -25,9 +25,9 @@ import static com.aventstack.extentreports.MediaEntityBuilder.createScreenCaptur
 @Slf4j
 public class ExtentReportListener extends BaseOperations implements ITestListener {
 
-    public static ExtentSparkReporter spark;
-    public static ExtentReports extent;
-    public static ExtentTest test;
+    private static ExtentSparkReporter spark;
+    private static ExtentReports extent;
+    private static ExtentTest test;
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
@@ -85,14 +85,16 @@ public class ExtentReportListener extends BaseOperations implements ITestListene
         test = extent.createTest(context.getName());
         log.debug("start " + context.getName());
         extent.setSystemInfo("os", "winos");
-        extent.setSystemInfo("Automation Tests", "Aviad ben shimon");
+        extent.setSystemInfo("Automation Tests", "Demo");
         spark.config().setTheme(Theme.STANDARD);
         spark.config().setEncoding("utf-8");
+        spark.getReport().getStartTime();
     }
 
     @Override
     public void onFinish(ITestContext context) {
         log.debug("finish tests " + context.getName());
+        spark.getReport().getEndTime();
         extent.flush();
     }
 
