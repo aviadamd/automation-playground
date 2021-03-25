@@ -69,10 +69,10 @@ public class BaseOperations extends Base {
         String browser = getProperty.platformType;
         switch (browser) {
             case "chrome":
-                driver = Base.initChromeDriver(disableBeforeLaunch());
+                driver = Base.initChromeDriver(chromeOptionsDisableBeforeLaunch());
                 break;
             case "firefox":
-                driver = Base.initFireFoxDriver();
+                driver = Base.initFireFoxDriver(firefoxOptions());
                 break;
         }
         log.debug("init " + browser + " type platform");
@@ -84,27 +84,5 @@ public class BaseOperations extends Base {
     private void initApplication() {
         driver = Base.startAppiumServer();
         log.debug("init " + getProperty.platform + " type platform");
-    }
-
-    public ChromeOptions disableBeforeLaunch() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("disable-extensions");
-        options.addArguments("disable-popup-blocking");
-        options.addArguments("disable-infobars");
-        options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
-        return options;
-    }
-
-    private ChromeOptions setCookiesConfig(int setValue) {
-        HashMap<String, Object> prefs = new HashMap<>();
-        //1 - enable , 2 - disable
-        prefs.put("profile.default_content_setting_values.cookies",setValue);
-        prefs.put("network.cookie.cookieBehavior",setValue);
-        if (setValue == 1)
-            prefs.put("profile.block_third_party_cookies", true);
-        else prefs.put("profile.block_third_party_cookies", false);
-        ChromeOptions options = new ChromeOptions();
-        options.setExperimentalOption("prefs", prefs);
-        return options;
     }
 }

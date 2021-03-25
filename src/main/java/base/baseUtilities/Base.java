@@ -8,10 +8,12 @@ import io.appium.java_client.service.local.flags.GeneralServerFlag;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
@@ -72,9 +74,40 @@ public class Base {
         return new ChromeDriver();
     }
 
-    protected static WebDriver initFireFoxDriver() {
+    protected static WebDriver initFireFoxDriver(FirefoxOptions options) {
         WebDriverManager.firefoxdriver().setup();
+        if (Optional.ofNullable(options).isPresent())
+            return new FirefoxDriver(options);
         return new FirefoxDriver();
     }
 
+    public FirefoxOptions firefoxOptions() {
+        FirefoxOptions firefoxOptions = new FirefoxOptions();
+        firefoxOptions.addArguments("disable-restore-session-state");
+        return firefoxOptions;
+    }
+
+    public ChromeOptions chromeOptionsDisableBeforeLaunch() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("disable-extensions");
+        options.addArguments("disable-popup-blocking");
+        options.addArguments("disable-infobars");
+        options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+        return options;
+    }
+
+    private MutableCapabilities setCookiesConfig(int setValue) {
+        HashMap<String, Object> prefs = new HashMap<>();
+        //1 - enable , 2 - disable
+        prefs.put("profile.default_content_setting_values.cookies",setValue);
+        prefs.put("network.cookie.cookieBehavior",setValue);
+        if (setValue == 1)
+            prefs.put("profile.block_third_party_cookies", true);
+        else prefs.put("profile.block_third_party_cookies", false);
+        MutableCapabilities capabilities = new MutableCapabilities();
+        capabilities.setCapability("prefs", prefs);
+        //ChromeOptions options = new ChromeOptions();
+        //options.setExperimentalOption("prefs", prefs);
+        return capabilities;
+    }
 }
