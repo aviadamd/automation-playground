@@ -62,7 +62,7 @@ public class ExtentReportListener extends BaseOperations implements ITestListene
                         + "</b>"
                         + "</summary>"
                         + Arrays.toString(result.getThrowable()
-                        .getStackTrace()).replace(",", "<br>")
+                         .getStackTrace()).replace(",", "<br>")
                         + "</details> \n"
                         + "</summary>";
         test.log(Status.FAIL, MarkupHelper.createLabel(error, ExtentColor.BLUE));
@@ -83,7 +83,7 @@ public class ExtentReportListener extends BaseOperations implements ITestListene
     @Override
     public void onStart(ITestContext context) {
         extent = new ExtentReports();
-        spark = new ExtentSparkReporter("target/Spark.html");
+        spark = new ExtentSparkReporter("Report/Spark.html");
         extent.attachReporter(spark);
         test = extent.createTest(context.getName());
         log.debug("start " + context.getName());
