@@ -15,15 +15,14 @@ pipeline {
     }
     post {
        always {
-           archive (includes: 'pkg/*.gem')
-              publishHTML (target: [
-                  allowMissing: false,
-                  alwaysLinkToLastBuild: false,
-                  keepAll: true,
-                  reportDir: '/report',
-                  reportFiles: 'Spark.html',
-                  reportName: "Extent Report"
-              ])
+           publishHTML (target: [
+               allowMissing: false,
+               alwaysLinkToLastBuild: false,
+               keepAll: true,
+               reportDir: "/report",
+               reportFiles: "Spark.html",
+               reportName: "Extent Report"
+           ])
        }
     }
 }
