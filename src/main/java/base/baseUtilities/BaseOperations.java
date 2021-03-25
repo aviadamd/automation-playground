@@ -8,7 +8,6 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.testng.annotations.AfterClass;
@@ -49,27 +48,26 @@ public class BaseOperations extends Base {
         String getPlatform = getProperty.platform;
         switch (getPlatform) {
             case "web":
-                log.info("w");
                 break;
             case "mobile":
-                log.info("m");
                 break;
         }
     }
 
     @AfterClass(description = "quit sessions")
     public void closeSession() {
-        if (driver == null) throw new WebDriverException("cannot reach driver");
         String getPlatform = getProperty.platform;
-        switch (getPlatform) {
-            case "web":
-                driver.close();
-                driver.quit();
-                break;
-            case "mobile" :
-                server.stop();
-                driver.quit();
-                break;
+        if (driver != null) {
+            switch (getPlatform) {
+                case "web":
+                    driver.close();
+                    driver.quit();
+                    break;
+                case "mobile":
+                    server.stop();
+                    driver.quit();
+                    break;
+            }
         }
     }
 
@@ -91,11 +89,8 @@ public class BaseOperations extends Base {
     }
 
     private void initApplication() {
-        String application = getProperty.platform;
-        if (application.equals("appium"))
-            driver = Base.startAppiumServer();
-        else throw new IllegalArgumentException("provide valid application driver type");
-        log.debug("init " + application + " type platform");
+        driver = Base.startAppiumServer();
+        log.debug("init " + getProperty.platform + " type platform");
     }
 
     public ChromeOptions disableBeforeLaunch() {

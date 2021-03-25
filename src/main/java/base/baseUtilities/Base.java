@@ -17,17 +17,14 @@ import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 import ru.yandex.qatools.ashot.comparison.ImageDiffer;
 import java.io.File;
-import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Optional;
-import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
 public class Base {
 
     public static WebDriver driver;
-    private static Properties prop;
     public static PropertyConfig getProperty;
     public static AppiumDriverLocalService server;
     public static Screenshot imageScreenShot;
@@ -36,25 +33,8 @@ public class Base {
 
     @SneakyThrows
     public Base() {
-        prop = new Properties();
         String path = "/src/main/resources/config.properties";
-        FileInputStream ip = new FileInputStream(System.getProperty("user.dir") + path);
-        prop.load(ip);
-        getProperty = new PropertyConfig();
-        getProperty.platform = setProperties("platform");
-        getProperty.platformType = setProperties("platformType");
-        getProperty.url = setProperties("url");
-        getProperty.localBin = setProperties("localBin");
-        getProperty.androidSdk = setProperties("androidSdk");
-        getProperty.nodeJs = setProperties("nodeJs");
-        getProperty.appPath = setProperties("appPath");
-        ip.close();
-    }
-
-    private static String setProperties(String proName) {
-        if (System.getProperty(proName) != null)
-             return System.getProperty(proName);
-        else return prop.getProperty(proName);
+        getProperty = new PropertyConfig(path);
     }
 
     protected static WebDriver startAppiumServer() {
