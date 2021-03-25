@@ -7,7 +7,7 @@ import java.util.Properties;
 
 public class PropertyConfig {
 
-    public static Properties prop;
+    private static Properties prop;
     public String platform;
     public String platformType;
     public String url;
@@ -33,7 +33,7 @@ public class PropertyConfig {
 
     private static String setProperties(String proName) {
         if (System.getProperty(proName) != null)
-            return System.getProperty(proName);
+             return System.getProperty(proName);
         else return prop.getProperty(proName);
     }
 
