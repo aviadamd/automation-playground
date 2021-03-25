@@ -1,6 +1,5 @@
 package test.accountManagement;
 
-import base.baseUtilities.Base;
 import base.baseUtilities.BaseOperations;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.Test;
