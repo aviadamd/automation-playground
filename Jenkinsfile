@@ -15,15 +15,15 @@ pipeline {
     }
     post {
        always {
-           script {
-              allure([
-                     includeProperties: false,
-                     jdk: '',
-                     properties: [],
-                     reportBuildPolicy: 'ALWAYS',
-                     results: [[path: 'target/allure-results']]
+           archive (includes: 'pkg/*.gem')
+              publishHTML (target: [
+                  allowMissing: false,
+                  alwaysLinkToLastBuild: false,
+                  keepAll: true,
+                  reportDir: 'coverage',
+                  reportFiles: 'index.html',
+                  reportName: "Extent Report"
               ])
-           }
        }
     }
 }

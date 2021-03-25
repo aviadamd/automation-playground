@@ -3,6 +3,7 @@ package base.baseUtilities.listeners;
 import base.baseUtilities.BaseOperations;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
@@ -43,8 +44,10 @@ public class ExtentReportListener extends BaseOperations implements ITestListene
     public void onTestFailure(ITestResult result) {
         log.error("fail " + result.getName());
         try {
-            test.log(Status.WARNING, result.getName() + "Test Case Failed",
-                    createScreenCaptureFromBase64String(screenshot(result.getName(),driver)).build());
+            test.fail(MediaEntityBuilder.createScreenCaptureFromPath("img.png").build());
+            test.fail(MediaEntityBuilder.createScreenCaptureFromBase64String("base64").build());
+          //  test.log(Status.WARNING, result.getName() + "Test Case Failed",
+            //        createScreenCaptureFromBase64String(screenshot(result.getName(),driver)).build());
         } catch (Exception e) {
             log.error(e.getMessage());
         }
