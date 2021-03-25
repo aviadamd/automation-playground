@@ -109,6 +109,7 @@ public class ExtentReportListener extends BaseOperations implements ITestListene
         String dateName = new SimpleDateFormat("yyyy-MM-dd-hh-mm").format(new Date());
         TakesScreenshot ts = (TakesScreenshot) driver;
         File source = ts.getScreenshotAs(OutputType.FILE);
+
         String destination = System.getProperty("user.dir")+"/Report/"+screenName+dateName+".png";
         File finalDestination = new File(destination);
         FileUtils.copyFile(source, finalDestination);
