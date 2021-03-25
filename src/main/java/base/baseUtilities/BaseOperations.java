@@ -26,10 +26,10 @@ public class BaseOperations extends Base {
 
     @BeforeClass(description = "before class start action")
     public void startSession() {
-        String getPlatform = Base.platform;
+        String getPlatform = getProperty.platform;
         switch (getPlatform) {
             case "web" :
-                initWebBrowser(url);
+                initWebBrowser(getProperty.url);
                 break;
             case "mobile" :
                 initApplication();
@@ -41,36 +41,35 @@ public class BaseOperations extends Base {
 
     @AfterMethod(description = "after method")
     public void afterMethod() {
-        String getPlatform = Base.platform;
+        String getPlatform = getProperty.platform;
         switch (getPlatform) {
             case "web":
-                log.info("w");
                 break;
             case "mobile":
-                log.info("m");
                 break;
         }
     }
 
     @AfterClass(description = "quit sessions")
     public void closeSession() {
-        if (driver == null) throw new WebDriverException("cannot reach driver");
-        String getPlatform = Base.platform;
-        switch (getPlatform) {
-            case "web":
-                driver.close();
-                driver.quit();
-                break;
-            case "mobile" :
-                server.stop();
-                driver.quit();
-                break;
+        String getPlatform = getProperty.platform;
+        if (driver != null) {
+            switch (getPlatform) {
+                case "web":
+                    driver.close();
+                    driver.quit();
+                    break;
+                case "mobile":
+                    server.stop();
+                    driver.quit();
+                    break;
+            }
         }
     }
 
     @Description("init web browser with {0} url")
     private void initWebBrowser(String url) {
-        String browser = Base.typeFromPlatform;
+        String browser = getProperty.platformType;
         switch (browser) {
             case "chrome":
                 driver = Base.initChromeDriver(disableBeforeLaunch());
@@ -86,11 +85,8 @@ public class BaseOperations extends Base {
     }
 
     private void initApplication() {
-        String application = platform;
-        if (application.equals("appium"))
-            driver = Base.startAppiumServer();
-        else throw new IllegalArgumentException("provide valid application driver type");
-        log.debug("init " + application + " type platform");
+        driver = Base.startAppiumServer();
+        log.debug("init " + getProperty.platform + " type platform");
     }
 
     public ChromeOptions disableBeforeLaunch() {
@@ -108,7 +104,7 @@ public class BaseOperations extends Base {
         prefs.put("profile.default_content_setting_values.cookies",setValue);
         prefs.put("network.cookie.cookieBehavior",setValue);
         if (setValue == 1)
-             prefs.put("profile.block_third_party_cookies", true);
+            prefs.put("profile.block_third_party_cookies", true);
         else prefs.put("profile.block_third_party_cookies", false);
         ChromeOptions options = new ChromeOptions();
         options.setExperimentalOption("prefs", prefs);
