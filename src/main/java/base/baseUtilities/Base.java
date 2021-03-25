@@ -16,6 +16,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 import ru.yandex.qatools.ashot.comparison.ImageDiffer;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.HashMap;
