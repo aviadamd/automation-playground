@@ -26,6 +26,14 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class Base {
 
+    public static String mobile;
+    public static String platform;
+    public static String typeFromPlatform;
+    public static String url;
+    public static String localBin;
+    public static String androidSdk;
+    public static String nodeJs;
+    public static String appPath;
     public static WebDriver driver;
     public static Properties prop;
     public static AppiumDriverLocalService server;
@@ -39,16 +47,31 @@ public class Base {
         final String path = "/src/main/resources/config.properties";
         FileInputStream ip = new FileInputStream(System.getProperty("user.dir") + path);
         prop.load(ip);
+        mobile = getProperties("mobile");
+        platform = getProperties("platform");
+        typeFromPlatform = getProperties("typeFromPlatform");
+        url = getProperties("url");
+        localBin = getProperties("localBin");
+        androidSdk = getProperties("androidSdk");
+        nodeJs = getProperties("nodeJs");
+        appPath = getProperties("appPath");
+        ip.close();
+    }
+
+    private static String getProperties(String proName) {
+        if (System.getProperty(proName) != null)
+             return System.getProperty(proName);
+        else return prop.getProperty(proName);
     }
 
     protected static WebDriver startAppiumServer() {
         HashMap<String, String> environment = new HashMap<>();
-        environment.put("PATH", prop.getProperty("localBin") + System.getenv("PATH"));
-        environment.put("ANDROID_HOME", prop.getProperty("androidSdk"));
+        environment.put("PATH", localBin + System.getenv("PATH"));
+        environment.put("ANDROID_HOME", androidSdk);
 
         DesiredCapabilities capabilities = initCapabilities();
         server = AppiumDriverLocalService.buildService(new AppiumServiceBuilder()
-                .usingDriverExecutable(new File(prop.getProperty("nodeJs")))
+                .usingDriverExecutable(new File(nodeJs))
                 .usingAnyFreePort()
                 .withArgument(GeneralServerFlag.SESSION_OVERRIDE)
                 .withArgument(GeneralServerFlag.LOG_LEVEL, "error")

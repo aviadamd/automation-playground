@@ -31,10 +31,10 @@ public class BaseOperations extends Base {
     @Story("init web driver with base url")
     @BeforeClass(description = "before class start action")
     public void startSession() {
-        String getPlatform = prop.getProperty("platform");
+        String getPlatform = Base.platform;
         switch (getPlatform) {
             case "web" :
-                initWebBrowser(prop.getProperty("url"));
+                initWebBrowser(url);
                 break;
             case "mobile" :
                 initApplication();
@@ -46,7 +46,7 @@ public class BaseOperations extends Base {
 
     @AfterMethod(description = "after method")
     public void afterMethod() {
-        String getPlatform = prop.getProperty("platform");
+        String getPlatform = Base.platform;
         switch (getPlatform) {
             case "web":
                 log.info("w");
@@ -60,7 +60,7 @@ public class BaseOperations extends Base {
     @AfterClass(description = "quit sessions")
     public void closeSession() {
         if (driver == null) throw new WebDriverException("cannot reach driver");
-        String getPlatform = prop.getProperty("platform");
+        String getPlatform = Base.platform;
         switch (getPlatform) {
             case "web":
                 driver.close();
@@ -75,12 +75,12 @@ public class BaseOperations extends Base {
 
     @Description("init web browser with {0} url")
     private void initWebBrowser(String url) {
-        String browser = prop.getProperty("typeFromPlatform");
+        String browser = Base.typeFromPlatform;
         switch (browser) {
             case "chrome":
                 driver = Base.initChromeDriver(disableBeforeLaunch());
                 break;
-            case "safari":
+            case "firefox":
                 driver = Base.initFireFoxDriver();
                 break;
         }
@@ -91,7 +91,7 @@ public class BaseOperations extends Base {
     }
 
     private void initApplication() {
-        String application = prop.getProperty("typeFromPlatform");
+        String application = platform;
         if (application.equals("appium"))
             driver = Base.startAppiumServer();
         else throw new IllegalArgumentException("provide valid application driver type");

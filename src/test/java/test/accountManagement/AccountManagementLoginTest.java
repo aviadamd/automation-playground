@@ -13,6 +13,5 @@ public class AccountManagementLoginTest extends TestMethodsObjects {
     @Description("login to account management with valid user name and pass word")
     public void test01_login() {
         accountManagementShared().login("admin", "5311072BsDvir");
-        uiActions().click(webUi.accountManagementLoginPage.loginBtn);
     }
 }
