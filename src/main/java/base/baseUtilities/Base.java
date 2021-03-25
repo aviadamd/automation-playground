@@ -26,16 +26,9 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class Base {
 
-    public static String mobile;
-    public static String platform;
-    public static String typeFromPlatform;
-    public static String url;
-    public static String localBin;
-    public static String androidSdk;
-    public static String nodeJs;
-    public static String appPath;
     public static WebDriver driver;
-    public static Properties prop;
+    private static Properties prop;
+    public static PropertyConfig getProperty;
     public static AppiumDriverLocalService server;
     public static Screenshot imageScreenShot;
     public static ImageDiff imageDiff;
@@ -44,21 +37,21 @@ public class Base {
     @SneakyThrows
     public Base() {
         prop = new Properties();
-        final String path = "/src/main/resources/config.properties";
+        String path = "/src/main/resources/config.properties";
         FileInputStream ip = new FileInputStream(System.getProperty("user.dir") + path);
         prop.load(ip);
-        mobile = getProperties("mobile");
-        platform = getProperties("platform");
-        typeFromPlatform = getProperties("typeFromPlatform");
-        url = getProperties("url");
-        localBin = getProperties("localBin");
-        androidSdk = getProperties("androidSdk");
-        nodeJs = getProperties("nodeJs");
-        appPath = getProperties("appPath");
+        getProperty = new PropertyConfig();
+        getProperty.platform = setProperties("platform");
+        getProperty.platformType = setProperties("platformType");
+        getProperty.url = setProperties("url");
+        getProperty.localBin = setProperties("localBin");
+        getProperty.androidSdk = setProperties("androidSdk");
+        getProperty.nodeJs = setProperties("nodeJs");
+        getProperty.appPath = setProperties("appPath");
         ip.close();
     }
 
-    private static String getProperties(String proName) {
+    private static String setProperties(String proName) {
         if (System.getProperty(proName) != null)
              return System.getProperty(proName);
         else return prop.getProperty(proName);
@@ -66,12 +59,12 @@ public class Base {
 
     protected static WebDriver startAppiumServer() {
         HashMap<String, String> environment = new HashMap<>();
-        environment.put("PATH", localBin + System.getenv("PATH"));
-        environment.put("ANDROID_HOME", androidSdk);
+        environment.put("PATH", getProperty.localBin + System.getenv("PATH"));
+        environment.put("ANDROID_HOME", getProperty.androidSdk);
 
         DesiredCapabilities capabilities = initCapabilities();
         server = AppiumDriverLocalService.buildService(new AppiumServiceBuilder()
-                .usingDriverExecutable(new File(nodeJs))
+                .usingDriverExecutable(new File(getProperty.nodeJs))
                 .usingAnyFreePort()
                 .withArgument(GeneralServerFlag.SESSION_OVERRIDE)
                 .withArgument(GeneralServerFlag.LOG_LEVEL, "error")
