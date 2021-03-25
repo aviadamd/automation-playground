@@ -1,12 +1,12 @@
 package test.accountManagement;
 
-import base.baseUtilities.listeners.AllureListeners;
-import io.qameta.allure.Description;
+import base.baseUtilities.listeners.ExtentReportListener;
+import org.springframework.context.annotation.Description;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import test.TestMethodsObjects;
 
-@Listeners({AllureListeners.class})
+@Listeners({ExtentReportListener.class})
 public class AccountManagementLoginTest extends TestMethodsObjects {
 
     @Test(description = "test 01 : login to account management")

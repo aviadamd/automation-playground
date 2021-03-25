@@ -3,13 +3,10 @@ package base.baseUtilities;
 import base.utilities.JavaScriptUtil;
 import base.utilities.UiActions;
 import base.utilities.Verfications;
-import io.qameta.allure.Description;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
-import io.qameta.allure.Story;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.springframework.context.annotation.Description;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -27,8 +24,6 @@ public class BaseOperations extends Base {
     public Verfications verfications() { return new Verfications(); }
     public JavaScriptUtil jsUtil() { return new JavaScriptUtil(); }
 
-    @Severity(SeverityLevel.BLOCKER)
-    @Story("init web driver with base url")
     @BeforeClass(description = "before class start action")
     public void startSession() {
         String getPlatform = Base.platform;
