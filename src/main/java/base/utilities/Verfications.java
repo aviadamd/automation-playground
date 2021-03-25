@@ -15,20 +15,17 @@ import java.util.Collections;
 @Slf4j
 public class Verfications extends BaseOperations {
 
-    @Step("load page or elements")
     public void load(ArrayList<WebElement> elements) {
         for (WebElement pageEle : elements) {
             uiActions().elementPresented(pageEle,5);
         }
     }
 
-    @Step("load page or single element")
     public void load(WebElement element) {
 
         load(new ArrayList<>(Collections.singleton(element)));
     }
 
-    @Step("verify number of elements within page or element")
     public void verifyNumberOfElements(ArrayList<WebElement> elements, int numbers) {
         try {
             WebDriverWait webDriverWait = new WebDriverWait(driver,10);
@@ -41,7 +38,6 @@ public class Verfications extends BaseOperations {
         }
     }
 
-    @Step("compere texts")
     private void compereTexts(ArrayList<WebElement> elements, ArrayList<String> text) {
         if (elements.size() != text.size())
             Assert.fail(elements.size() + " not equals to " + text.size());

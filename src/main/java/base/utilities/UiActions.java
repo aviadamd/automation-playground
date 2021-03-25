@@ -20,13 +20,11 @@ import java.util.function.BiConsumer;
 @Slf4j
 public class UiActions extends BaseOperations {
 
-    @Step("perform step action")
     public void perform(String text, BiConsumer<UiActions,Verfications> actionsConsumer) {
         log.debug(text);
         actionsConsumer.accept(uiActions(), verfications());
     }
 
-    @Step("verify element {0} is clickable")
     public void elementToBeClickable(WebElement element) {
         try {
             WebDriverWait webDriverWait = new WebDriverWait(driver,10);
@@ -36,7 +34,6 @@ public class UiActions extends BaseOperations {
         }
     }
 
-    @Step("click action on {0} element")
     public void click(WebElement element) {
         try {
             elementToBeClickable(element);
@@ -47,7 +44,6 @@ public class UiActions extends BaseOperations {
         }
     }
 
-    @Step("click action on {0} element")
     public void clickOptional(WebElement element) {
         try {
             if (elementPresented(element,5)) element.click();
@@ -56,7 +52,6 @@ public class UiActions extends BaseOperations {
         }
     }
 
-    @Step("verify is {0} element is presented")
     public boolean elementPresented(WebElement element, int timeOut) {
         try {
             WebDriverWait webDriverWait = new WebDriverWait(driver,timeOut);
@@ -69,7 +64,6 @@ public class UiActions extends BaseOperations {
         }
     }
 
-    @Step("send {1} keys to element {0}")
     public void sendKeys(WebElement element, String text) {
         try {
             clickOptional(element);
@@ -80,14 +74,12 @@ public class UiActions extends BaseOperations {
         }
     }
 
-    @Step("drop down to element by text")
     public void updateDropDown(WebElement element, String text) {
         Select value = new Select(element);
         value.selectByVisibleText(text);
         verfications().load(element);
     }
 
-    @Step("mouse over elements")
     public void mouseHoverElements(WebElement element1, WebElement element2) {
         elementPresented(element1,5);
         Actions actions = new Actions(driver);
@@ -95,7 +87,6 @@ public class UiActions extends BaseOperations {
                 .click().build().perform();
     }
 
-    @Step("take web element screen shot")
     public void elementScreenShot(WebElement imageElement, String imageName) {
         try {
             imageScreenShot = new AShot()

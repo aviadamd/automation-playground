@@ -88,13 +88,11 @@ public class ExtentReportListener extends BaseOperations implements ITestListene
         extent.setSystemInfo("Automation Tests", "Demo");
         spark.config().setTheme(Theme.STANDARD);
         spark.config().setEncoding("utf-8");
-        spark.getReport().getStartTime();
     }
 
     @Override
     public void onFinish(ITestContext context) {
         log.debug("finish tests " + context.getName());
-        spark.getReport().getEndTime();
         extent.flush();
     }
 
