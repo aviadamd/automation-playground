@@ -11,6 +11,8 @@ pipeline {
                   echo "set up PLATFORM = ${env.PLATFORM}"
                   echo "set up PLATFORM_TYPE = ${env.PLATFORM_TYPE}"
                   echo "set up TEST_CLASS = ${env.TEST_CLASS}"
+                  bat "java -cp PLATFORM"
+                  bat "java -cp PLATFORM_TYPE"
                   bat "mvn clean test -Dtest=${env.TEST_CLASS}"
             }
         }
