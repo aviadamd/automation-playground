@@ -15,14 +15,9 @@ pipeline {
                   echo "set up PLATFORM = ${env.PLATFORM}"
                   echo "set up PLATFORM_TYPE = ${env.PLATFORM_TYPE}"
                   echo "set up TEST_CLASS = ${env.TEST_CLASS}"
-                  echo "${params}"
-                  script {
-                    def getParams = params  +
-                      string(name : PLATFORM, value: "${params.PLATFORM}") +
-                      string(name : PLATFORM_TYPE, value: "${params.PLATFORM_TYPE}")
-                      build job 'downstream-pipeline-with-params', parameters : getParams
-                  }
-                  bat "mvn clean test -Dtest=${env.TEST_CLASS}"
+                  bat "mvn -DPLATFORM = ${env.PLATFORM}"
+                  bat "mvn -DPLATFORM_TYPE = ${env.PLATFORM_TYPE}"
+                  bat "mvn clean test -Dtest = ${env.TEST_CLASS}"
             }
         }
     }
