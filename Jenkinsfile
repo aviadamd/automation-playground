@@ -8,8 +8,10 @@ pipeline {
         }
         stage('Run Tests') {
             steps {
-                 echo "set up TEST_CLASS = ${env.TEST_CLASS}"
-                 bat "mvn clean test -Dtest=${env.TEST_CLASS}"
+                  echo "set up PLATFORM = ${env.PLATFORM}"
+                  echo "set up PLATFORM_TYPE = ${env.PLATFORM_TYPE}"
+                  echo "set up TEST_CLASS = ${env.TEST_CLASS}"
+                  bat "mvn clean test -Dtest=${env.TEST_CLASS}"
             }
         }
     }
