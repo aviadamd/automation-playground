@@ -1,9 +1,5 @@
 pipeline {
     agent any
-    parameters {
-       string(name : 'PLATFORM', description : 'Param 1?')
-       string(name : 'PLATFORM_TYPE', description : 'Param 1?')
-    }
     stages {
         stage('Build Jar') {
             steps {
