@@ -15,8 +15,8 @@ pipeline {
         }
     }
     post {
-       archive includes: 'pkg/*.gem'
        always {
+           archive includes: 'pkg/*.gem'
            publishHTML ([
                allowMissing: true,
                alwaysLinkToLastBuild: false,
