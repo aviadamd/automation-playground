@@ -20,9 +20,8 @@ pipeline {
                allowMissing: true,
                alwaysLinkToLastBuild: false,
                keepAll: true,
-               reportDir: "/report",
                reportFiles: "Report.html",
-               reportName: "$env.TEST_CLASS report"
+               reportName: "test report"
            ])
        }
     }
