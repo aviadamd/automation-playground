@@ -1,26 +1,21 @@
 package base.baseUtilities;
 
-import base.utilities.JavaScriptUtil;
-import base.utilities.UiActions;
-import base.utilities.Verfications;
+import base.utilities.UiUtilities;
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
-import pages.WebUi;
-import java.util.HashMap;
+import pages.accountManagement.AccountManagementUiPages;
+
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @EnableAspectJAutoProxy
 public class BaseOperations extends Base {
 
-    public static WebUi webUi;
-    public UiActions uiActions() { return new UiActions(); }
-    public Verfications verfications() { return new Verfications(); }
-    public JavaScriptUtil jsUtil() { return new JavaScriptUtil(); }
+    public static UiUtilities utilities;
+    public static AccountManagementUiPages accountManagementUi;
 
     @BeforeClass(description = "before class start action")
     public void startSession() {
@@ -34,7 +29,8 @@ public class BaseOperations extends Base {
                 break;
         }
         log.debug("init " + getPlatform + " platform");
-        webUi = new WebUi(driver);
+        accountManagementUi = new AccountManagementUiPages(driver);
+        utilities = new UiUtilities();
     }
 
     @AfterMethod(description = "after method")

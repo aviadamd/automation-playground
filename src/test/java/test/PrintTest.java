@@ -1,4 +1,4 @@
-package test.accountManagement;
+package test;
 
 import base.baseUtilities.BaseOperations;
 import lombok.extern.slf4j.Slf4j;

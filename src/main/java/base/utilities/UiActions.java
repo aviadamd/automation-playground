@@ -22,7 +22,7 @@ public class UiActions extends BaseOperations {
 
     public void perform(String text, BiConsumer<UiActions,Verfications> actionsConsumer) {
         log.debug(text);
-        actionsConsumer.accept(uiActions(), verfications());
+        actionsConsumer.accept(utilities.uiActions(), utilities.verfications());
     }
 
     public void elementToBeClickable(WebElement element) {
@@ -77,7 +77,7 @@ public class UiActions extends BaseOperations {
     public void updateDropDown(WebElement element, String text) {
         Select value = new Select(element);
         value.selectByVisibleText(text);
-        verfications().load(element);
+        utilities.verfications().load(element);
     }
 
     public void mouseHoverElements(WebElement element1, WebElement element2) {

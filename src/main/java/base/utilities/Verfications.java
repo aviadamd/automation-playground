@@ -17,7 +17,7 @@ public class Verfications extends BaseOperations {
 
     public void load(ArrayList<WebElement> elements) {
         for (WebElement pageEle : elements) {
-            uiActions().elementPresented(pageEle,5);
+            utilities.uiActions().elementPresented(pageEle,5);
         }
     }
 

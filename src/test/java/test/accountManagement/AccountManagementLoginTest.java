@@ -1,12 +1,20 @@
 package test.accountManagement;
 
 import org.testng.annotations.Test;
-import test.TestMethodsObjects;
 
-public class AccountManagementLoginTest extends TestMethodsObjects {
+public class AccountManagementLoginTest extends AccountManagementFlows {
 
-    @Test(description = "test 01 : login to account management")
+    @Test(priority = 1, description = "test 01 : login to account management")
     public void test01_login() {
-        accountManagementShared().login("admin", "5311072BsDvir");
+        login("!wiz1017", "!abs12345");
+        utilities.uiActions().clickOptional(
+                accountManagementUi.getAccountManagementLoginPage().bannerCookies_xBtn);
+    }
+
+    @Test(priority = 2, description = "test 02 : login to account management")
+    public void test02_login() {
+        login("!wiz1017", "1abs12345");
+        utilities.uiActions().clickOptional(
+                accountManagementUi.getAccountManagementLoginPage().bannerCookies_xBtn);
     }
 }
