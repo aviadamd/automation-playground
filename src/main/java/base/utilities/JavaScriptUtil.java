@@ -1,6 +1,6 @@
 package base.utilities;
 
-import base.baseUtilities.BaseOperations;
+import base.baseUtilities.Base;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Slf4j
-public class JavaScriptUtil extends BaseOperations {
+public class JavaScriptUtil extends Base {
 
   private JavascriptExecutor getJavascriptExecutor() {
     return ((JavascriptExecutor) driver);

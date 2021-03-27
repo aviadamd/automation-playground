@@ -1,7 +1,6 @@
 package base.utilities;
 
-import base.baseUtilities.BaseOperations;
-import io.qameta.allure.Step;
+import base.baseUtilities.Base;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -18,11 +17,11 @@ import java.io.IOException;
 import java.util.function.BiConsumer;
 
 @Slf4j
-public class UiActions extends BaseOperations {
+public class UiActions extends Base {
 
-    public void perform(String text, BiConsumer<UiActions,Verfications> actionsConsumer) {
+    public void perform(String text, BiConsumer<UiActions, Verifications> actionsConsumer) {
         log.debug(text);
-        actionsConsumer.accept(utilities.uiActions(), utilities.verfications());
+        actionsConsumer.accept(utilities.uiActions(), utilities.verifications());
     }
 
     public void elementToBeClickable(WebElement element) {
@@ -77,7 +76,11 @@ public class UiActions extends BaseOperations {
     public void updateDropDown(WebElement element, String text) {
         Select value = new Select(element);
         value.selectByVisibleText(text);
-        utilities.verfications().load(element);
+    }
+
+    public void selectByValue(WebElement element, String value) {
+        Select select = new Select(element);
+        select.selectByValue(value);
     }
 
     public void mouseHoverElements(WebElement element1, WebElement element2) {

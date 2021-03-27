@@ -1,12 +1,12 @@
 package base.baseUtilities;
 
+import base.utilities.UiUtilities;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.GeneralServerFlag;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
@@ -15,6 +15,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.BeforeClass;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 import ru.yandex.qatools.ashot.comparison.ImageDiffer;
@@ -28,15 +29,35 @@ public class Base {
 
     public static WebDriver driver;
     public static PropertyConfig getProperty;
+    public static UiUtilities utilities;
     public static AppiumDriverLocalService server;
     public static Screenshot imageScreenShot;
     public static ImageDiff imageDiff;
     public ImageDiffer imageDiffer = new ImageDiffer();
 
-    @SneakyThrows
-    public Base() {
+    @BeforeClass
+    public void initClass() {
         String path = "/src/main/resources/config.properties";
         getProperty = new PropertyConfig(path);
+        utilities = new UiUtilities();
+    }
+
+    protected static void initWebBrowser(String browser) {
+        switch (browser) {
+            case "chrome":
+                driver = initChromeDriver(chromeOptionsDisableBeforeLaunch());
+                break;
+            case "firefox":
+                driver = initFireFoxDriver(firefoxOptions());
+                break;
+        }
+        log.debug("init " + browser + " type platform");
+    }
+
+    protected static void navigateTo(String url) {
+        driver.manage().window().maximize();
+        driver.get(url);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     protected static WebDriver startAppiumServer() {
@@ -81,13 +102,13 @@ public class Base {
         return new FirefoxDriver();
     }
 
-    public FirefoxOptions firefoxOptions() {
+    public static FirefoxOptions firefoxOptions() {
         FirefoxOptions firefoxOptions = new FirefoxOptions();
         firefoxOptions.addArguments("disable-restore-session-state");
         return firefoxOptions;
     }
 
-    public ChromeOptions chromeOptionsDisableBeforeLaunch() {
+    public static ChromeOptions chromeOptionsDisableBeforeLaunch() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("disable-extensions");
         options.addArguments("disable-popup-blocking");
@@ -106,8 +127,6 @@ public class Base {
         else prefs.put("profile.block_third_party_cookies", false);
         MutableCapabilities capabilities = new MutableCapabilities();
         capabilities.setCapability("prefs", prefs);
-        //ChromeOptions options = new ChromeOptions();
-        //options.setExperimentalOption("prefs", prefs);
         return capabilities;
     }
 }

@@ -1,19 +1,17 @@
 package base.utilities;
 
-import base.baseUtilities.BaseOperations;
-import io.qameta.allure.Step;
+import base.baseUtilities.Base;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-
 import java.util.ArrayList;
 import java.util.Collections;
 
 @Slf4j
-public class Verfications extends BaseOperations {
+public class Verifications extends Base {
 
     public void load(ArrayList<WebElement> elements) {
         for (WebElement pageEle : elements) {

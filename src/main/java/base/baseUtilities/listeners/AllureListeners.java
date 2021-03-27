@@ -1,6 +1,6 @@
 package base.baseUtilities.listeners;
 
-import base.baseUtilities.BaseOperations;
+import base.baseUtilities.Base;
 import io.qameta.allure.Attachment;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.OutputType;
@@ -11,7 +11,7 @@ import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 @Slf4j
-public class AllureListeners extends BaseOperations implements ITestListener {
+public class AllureListeners extends Base implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult iTestResult) {

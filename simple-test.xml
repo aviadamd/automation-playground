@@ -5,7 +5,7 @@
     </listeners>
     <test name= "test suite 1 login test">
         <classes>
-            <class name="test.accountManagement.AccountManagementLoginTest"/>
+            <class name="test.flightPageRegistration.test.BookFlightTest"/>
         </classes>
     </test>
 </suite>
