@@ -20,7 +20,7 @@ pipeline {
                allowMissing: true,
                alwaysLinkToLastBuild: false,
                keepAll: true,
-               reportDir: "Report/Spark.html",
+               reportDir: "Report",
                reportFiles: "Spark.html",
                reportName: "test report"
            ])
