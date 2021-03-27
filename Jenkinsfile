@@ -20,7 +20,7 @@ pipeline {
                allowMissing: true,
                alwaysLinkToLastBuild: false,
                keepAll: true,
-               reportDir: "\Report",
+               reportDir: "C:\Users\Lenovo\jenkins\workspace\AUTOMATION_PLAY_GROUND_EXTENT_REPORT\Report",
                reportFiles: "Spark.html",
                reportName: "test report"
            ])
