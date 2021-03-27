@@ -10,9 +10,9 @@ pipeline {
             steps {
                   echo "set up PLATFORM=${env.platform}"
                   echo "set up PLATFORM_TYPE=${env.platformType}"
-                  bat "mvn -Dplatform=${env.PLATFORM}"
-                  bat "mvn -DplatformType=${env.PLATFORM_TYPE}"
-                  bat "mvn clean test -Dtest=${env.TEST_CLASS}"
+                  bat  "set platform=\"${env.PLATFORM}\""
+                  bat  "set platformType=\"${env.PLATFORM_TYPE}\""
+                  bat  "mvn clean test -Dtest=${env.TEST_CLASS}"
             }
         }
     }
