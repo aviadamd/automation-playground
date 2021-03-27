@@ -10,10 +10,7 @@ pipeline {
             steps {
                 bat "set platform=\"${env.platform}\""
                 bat "set platformType=\"${env.platformType}\""
-                bat "mvn clean test
-                -Dtest=${env.TEST_CLASS}
-                -Dplatform=${env.platform}
-                -DplatformType=${env.platformType}"
+                bat "mvn clean test -Dtest=${env.TEST_CLASS} -Dplatform=${env.platform} -DplatformType=${env.platformType}"
             }
         }
     }
