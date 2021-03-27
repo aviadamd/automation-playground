@@ -16,13 +16,13 @@ pipeline {
     }
     post {
        always {
-           publishHTML (target: [
+           publishHTML ([
                allowMissing: true,
                alwaysLinkToLastBuild: false,
                keepAll: true,
-               reportDir: "",
-               reportFiles: "Spark.html",
-               reportName: "$env.TEST_CLASS extent report"
+               reportDir: "/report",
+               reportFiles: "Report.html",
+               reportName: "$env.TEST_CLASS report"
            ])
        }
     }
