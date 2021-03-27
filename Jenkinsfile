@@ -20,6 +20,7 @@ pipeline {
                allowMissing: true,
                alwaysLinkToLastBuild: false,
                keepAll: true,
+               reportDir: "",
                reportFiles: "Report.html",
                reportName: "test report"
            ])
