@@ -20,7 +20,7 @@ pipeline {
                allowMissing: true,
                alwaysLinkToLastBuild: false,
                keepAll: true,
-               reportDir: "D:Test\test-output",
+               reportDir: "",
                reportFiles: "Spark.html",
                reportName: "$env.TEST_CLASS extent report"
            ])
