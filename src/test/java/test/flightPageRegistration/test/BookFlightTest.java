@@ -6,7 +6,7 @@ import test.flightPageRegistration.components.*;
 
 public class BookFlightTest extends FactoryBaseTest {
 
-    @Test
+    @Test(priority = 1)
     public void registrationPage() {
         RegistrationComponent registrationPage = new RegistrationComponent();
         registrationPage.landingPage();
@@ -15,7 +15,7 @@ public class BookFlightTest extends FactoryBaseTest {
         registrationPage.submit();
     }
 
-    @Test(dependsOnMethods = "registrationPage")
+    @Test(priority = 2, dependsOnMethods = "registrationPage")
     public void registrationConfirmationPage(){
         RegistrationConfirmationComponent registrationConfirmationPage =
                 new RegistrationConfirmationComponent();
