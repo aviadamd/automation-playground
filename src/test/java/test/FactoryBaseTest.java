@@ -15,7 +15,7 @@ public class FactoryBaseTest extends Base {
     public void beforeClass() {
         driverManager = DriverManagerFactory.getManager(getProperty.platformType);
         driver = driverManager.getDriver();
-        Base.navigateTo(getProperty.url);
+        navigateToUrl(getProperty.url);
         flightUi = new FlightUi(driver);
     }
 
