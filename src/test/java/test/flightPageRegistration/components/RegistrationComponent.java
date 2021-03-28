@@ -1,12 +1,15 @@
 package test.flightPageRegistration.components;
 
+import base.baseUtilities.Base;
 import lombok.extern.slf4j.Slf4j;
 import test.BaseTest;
+import test.FactoryBaseTest;
 
 @Slf4j
-public class RegistrationComponent extends BaseTest {
+public class RegistrationComponent extends FactoryBaseTest {
 
-    public void landingPage(){
+    public void landingPage() {
+
         utilities.uiActions().elementPresented(flightUi.registrationPage.firstNameTxt,5);
     }
 

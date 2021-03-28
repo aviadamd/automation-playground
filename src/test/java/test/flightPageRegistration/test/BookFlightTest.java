@@ -1,13 +1,10 @@
 package test.flightPageRegistration.test;
 
-import base.baseUtilities.listeners.AllureListeners;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import test.BaseTest;
+import test.FactoryBaseTest;
 import test.flightPageRegistration.components.*;
 
-@Listeners(AllureListeners.class)
-public class BookFlightTest extends BaseTest {
+public class BookFlightTest extends FactoryBaseTest {
 
     @Test
     public void registrationPage() {
