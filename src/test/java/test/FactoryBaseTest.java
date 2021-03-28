@@ -13,7 +13,7 @@ public class FactoryBaseTest extends Base {
 
     @BeforeClass(description = "start sessions")
     public void beforeClass() {
-        driverManager = DriverManagerFactory.getManager("chrome");
+        driverManager = DriverManagerFactory.getManager(getProperty.platformType);
         driver = driverManager.getDriver();
         Base.navigateTo(getProperty.url);
         flightUi = new FlightUi(driver);

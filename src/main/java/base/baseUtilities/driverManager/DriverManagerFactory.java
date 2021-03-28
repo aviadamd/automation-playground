@@ -1,7 +1,11 @@
 package base.baseUtilities.driverManager;
 
 import base.baseUtilities.Base;
+import base.baseUtilities.driverManager.InitDrivers.AndroidDriverManager;
+import base.baseUtilities.driverManager.InitDrivers.ChromeDriverManager;
+import base.baseUtilities.driverManager.InitDrivers.FirefoxDriverManager;
 import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.remote.BrowserType;
 
 @Slf4j
 public class DriverManagerFactory extends Base {
@@ -9,13 +13,13 @@ public class DriverManagerFactory extends Base {
     public static DriverManager getManager(String type) {
         DriverManager driverManager;
         switch (type) {
-            case "chrome":
+            case BrowserType.CHROME:
                 driverManager = new ChromeDriverManager();
                 break;
-            case "firefox":
+            case BrowserType.FIREFOX:
                 driverManager = new FirefoxDriverManager();
                 break;
-            case "android":
+            case BrowserType.ANDROID:
                 driverManager = new AndroidDriverManager();
                 break;
             default:

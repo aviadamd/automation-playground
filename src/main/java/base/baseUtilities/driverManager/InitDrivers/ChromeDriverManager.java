@@ -1,5 +1,6 @@
-package base.baseUtilities.driverManager;
+package base.baseUtilities.driverManager.InitDrivers;
 
+import base.baseUtilities.driverManager.DriverManager;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
