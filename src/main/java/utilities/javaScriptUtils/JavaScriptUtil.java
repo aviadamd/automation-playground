@@ -1,6 +1,6 @@
-package base.utilities;
+package utilities.javaScriptUtils;
 
-import base.baseUtilities.Base;
+import base.Base;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;

@@ -1,6 +1,6 @@
-package base.baseUtilities.driverManager.InitDrivers;
+package base.driverManager.InitDrivers;
 
-import base.baseUtilities.driverManager.DriverManager;
+import base.driverManager.DriverManager;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;

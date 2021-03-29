@@ -4,6 +4,8 @@ import org.testng.annotations.Test;
 import test.FactoryBaseTest;
 import test.flightPageRegistration.components.*;
 
+import java.util.function.Consumer;
+
 public class BookFlightTest extends FactoryBaseTest {
 
     @Test(priority = 1)

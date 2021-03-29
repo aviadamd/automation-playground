@@ -1,9 +1,9 @@
-package base.baseUtilities.driverManager;
+package base.driverManager;
 
-import base.baseUtilities.Base;
-import base.baseUtilities.driverManager.InitDrivers.AndroidDriverManager;
-import base.baseUtilities.driverManager.InitDrivers.ChromeDriverManager;
-import base.baseUtilities.driverManager.InitDrivers.FirefoxDriverManager;
+import base.Base;
+import base.driverManager.InitDrivers.AndroidDriverManager;
+import base.driverManager.InitDrivers.ChromeDriverManager;
+import base.driverManager.InitDrivers.FirefoxDriverManager;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.remote.BrowserType;
 

@@ -1,97 +1,111 @@
-package base.utilities;
+package utilities.uiActions;
 
-import base.baseUtilities.Base;
+import base.Base;
+import utilities.verfications.Verifications;
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider;
+
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.UnaryOperator;
+
 
 @Slf4j
-public class UiActions extends Base {
+public class UiActions extends Base implements UiActionsTemplate {
 
+    @Override
     public void perform(String text, BiConsumer<UiActions, Verifications> actionsConsumer) {
         log.debug(text);
         actionsConsumer.accept(utilities.uiActions(), utilities.verifications());
     }
 
-    public void elementToBeClickable(WebElement element) {
-        try {
-            WebDriverWait webDriverWait = new WebDriverWait(driver,10);
-            webDriverWait.until(ExpectedConditions.elementToBeClickable(element));
-        } catch (WebDriverException driverException) {
-            log.debug("fail , element is not clickable " + driverException.getMessage());
-        }
-    }
-
+    @Override
     public void click(WebElement element) {
-        try {
-            elementToBeClickable(element);
+        if (elementToBeClickable(element)) {
             log.debug("click on " + element.getText());
             element.click();
-        } catch (WebDriverException  driverException) {
-            Assert.fail("Fail click ", driverException);
-        }
+        } else Assert.fail("fail click on " + element.toString());
     }
 
+    @Override
     public void clickOptional(WebElement element) {
-        try {
-            if (elementPresented(element,5)) element.click();
-        } catch (WebDriverException  driverException) {
-            log.debug(element.toString() + " not presented");
+        if (elementToBeClickable(element) || elementPresented(element,1)) {
+            click(element);
         }
     }
 
+    @Override
     public boolean elementPresented(WebElement element, int timeOut) {
-        try {
-            WebDriverWait webDriverWait = new WebDriverWait(driver,timeOut);
-            webDriverWait.until(ExpectedConditions.visibilityOf(element));
-            log.debug(element.getText() + " is visible");
-            return true;
-        } catch (WebDriverException e) {
-            log.debug(element.toString() + " not presented");
-            return false;
-        }
+        return webDriverWait(timeOut, ExpectedConditions.visibilityOf(element), element);
     }
 
+    @Override
+    public boolean elementToBeClickable(WebElement element) {
+       return webDriverWait(10, ExpectedConditions.elementToBeClickable(element), element);
+    }
+
+    @Override
     public void sendKeys(WebElement element, String text) {
-        try {
-            clickOptional(element);
+        if (elementToBeClickable(element)) {
             element.sendKeys(text);
-            log.debug("Send " + text + " to " + element.getText());
-        } catch (WebDriverException driverException) {
-            Assert.fail("Fail send keys ", driverException);
-        }
+            log.debug("send " + text + " to " + element.getText());
+        } else Assert.fail("fail send keys to " + element.toString());
     }
 
-    public void updateDropDown(WebElement element, String text) {
+    @Override
+    public void selectByVisibleText(WebElement element, String text) {
         Select value = new Select(element);
         value.selectByVisibleText(text);
     }
 
+    @Override
     public void selectByValue(WebElement element, String value) {
         Select select = new Select(element);
         select.selectByValue(value);
     }
 
+    @Override
     public void mouseHoverElements(WebElement element1, WebElement element2) {
         elementPresented(element1,5);
         Actions actions = new Actions(driver);
-        actions.moveToElement(element1).moveToElement(element2)
-                .click().build().perform();
+        actions.moveToElement(element1)
+                .moveToElement(element2)
+                .click()
+                .build()
+                .perform();
+    }
+
+    @Override
+    public <T> boolean webDriverWait(int timeOut, ExpectedCondition<T> conditions, WebElement element) {
+        try {
+            new WebDriverWait(driver, timeOut).until(conditions.compose(driver -> {
+                log.debug("condition :" + element.getText() + conditions.toString() + " is true");
+                return null;
+            }));
+            return true;
+        } catch (TimeoutException | NullPointerException e) {
+            log.debug(conditions.toString() + " is false " + e.getMessage());
+        } catch (WebDriverException w) {
+            log.debug(conditions.toString() + " is false " + w.getAdditionalInformation());
+        }
+        return false;
+    }
+
+    @Override
+    public void clear(WebElement element) {
+        click(element);
+        element.clear();
     }
 
     public void elementScreenShot(WebElement imageElement, String imageName) {
@@ -104,11 +118,6 @@ public class UiActions extends Base {
         } catch (IOException ioException) {
             log.debug(ioException.getMessage());
         }
-    }
-
-    public void clear(WebElement element) {
-        click(element);
-        element.clear();
     }
 
 }

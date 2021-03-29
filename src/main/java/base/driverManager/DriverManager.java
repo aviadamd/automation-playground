@@ -1,6 +1,6 @@
-package base.baseUtilities.driverManager;
+package base.driverManager;
 
-import base.baseUtilities.Base;
+import base.Base;
 import org.openqa.selenium.WebDriver;
 
 public abstract class DriverManager extends Base {

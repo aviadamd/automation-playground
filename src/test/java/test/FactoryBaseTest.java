@@ -1,8 +1,8 @@
 package test;
 
-import base.baseUtilities.Base;
-import base.baseUtilities.driverManager.DriverManager;
-import base.baseUtilities.driverManager.DriverManagerFactory;
+import base.Base;
+import base.driverManager.DriverManager;
+import base.driverManager.DriverManagerFactory;
 import org.testng.annotations.*;
 import test.flightPageRegistration.FlightUi;
 

@@ -1,4 +1,4 @@
-package base.baseUtilities;
+package base;
 
 import lombok.SneakyThrows;
 import java.io.FileInputStream;

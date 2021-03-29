@@ -1,6 +1,6 @@
-package base.baseUtilities;
+package base;
 
-import base.utilities.UiUtilities;
+import utilities.UiUtilitiesObjects;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
@@ -14,7 +14,7 @@ public class Base {
 
     public static WebDriver driver;
     public static PropertyConfig getProperty;
-    public static UiUtilities utilities;
+    public static UiUtilitiesObjects utilities;
     public static Screenshot imageScreenShot;
     public static ImageDiff imageDiff;
     public ImageDiffer imageDiffer = new ImageDiffer();
@@ -23,7 +23,7 @@ public class Base {
     public void initClass() {
         String path = "/src/main/resources/config.properties";
         getProperty = new PropertyConfig(path);
-        utilities = new UiUtilities();
+        utilities = new UiUtilitiesObjects();
     }
 
     protected static void navigateToUrl(String url) {

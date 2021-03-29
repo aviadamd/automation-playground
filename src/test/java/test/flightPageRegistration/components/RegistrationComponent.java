@@ -3,6 +3,8 @@ package test.flightPageRegistration.components;
 import lombok.extern.slf4j.Slf4j;
 import test.FactoryBaseTest;
 
+import java.util.function.Consumer;
+
 @Slf4j
 public class RegistrationComponent extends FactoryBaseTest {
 
