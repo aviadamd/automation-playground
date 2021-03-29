@@ -5,8 +5,11 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.springframework.context.annotation.Description;
+
 import java.util.function.Supplier;
 
+@Description("use as a class that extends DriverManager abstract class template")
 public class ChromeDriverManager extends DriverManager {
 
     @Override

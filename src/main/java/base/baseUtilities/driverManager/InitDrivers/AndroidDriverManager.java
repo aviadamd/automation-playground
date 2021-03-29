@@ -1,6 +1,5 @@
 package base.baseUtilities.driverManager.InitDrivers;
 
-import base.baseUtilities.PropertyConfig;
 import base.baseUtilities.driverManager.DriverManager;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
@@ -9,20 +8,13 @@ import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.GeneralServerFlag;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.annotations.BeforeClass;
-
+import org.springframework.context.annotation.Description;
 import java.io.File;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
+@Description("use as a class that extends DriverManager abstract class template")
 public class AndroidDriverManager extends DriverManager {
-
-    private static PropertyConfig getProperty;
-    @BeforeClass
-    public void initClass() {
-        String path = "/src/main/resources/config.properties";
-        getProperty = new PropertyConfig(path);
-    }
 
     @Override
     protected void createDriver() {

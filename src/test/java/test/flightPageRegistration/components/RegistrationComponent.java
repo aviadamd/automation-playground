@@ -7,7 +7,6 @@ import test.FactoryBaseTest;
 public class RegistrationComponent extends FactoryBaseTest {
 
     public void landingPage() {
-
         utilities.uiActions().elementPresented(flightUi.registrationPage.firstNameTxt,5);
     }
 

@@ -5,9 +5,11 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.springframework.context.annotation.Description;
 
 import java.util.function.Supplier;
 
+@Description("use as a class that extends DriverManager abstract class template")
 public class FirefoxDriverManager extends DriverManager {
 
     @Override
