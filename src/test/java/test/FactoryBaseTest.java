@@ -13,7 +13,8 @@ public class FactoryBaseTest extends Base {
 
     @BeforeClass(description = "start sessions")
     public void beforeClass() {
-        driverManager = DriverManagerFactory.getManager(getProperty.platformType);
+        final String platform = getProperty.platformType;
+        driverManager = DriverManagerFactory.getManager(platform);
         driver = driverManager.getDriver();
         navigateToUrl(getProperty.url);
         flightUi = new FlightUi(driver);
