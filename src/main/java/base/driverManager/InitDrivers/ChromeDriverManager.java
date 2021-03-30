@@ -17,6 +17,11 @@ public class ChromeDriverManager extends DriverManager {
         chromeDriverSupplier.get();
     }
 
+    @Override
+    protected void stopDriver() {
+        driver.quit();
+    }
+
     private final Supplier<WebDriver> chromeDriverSupplier = () -> {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver(chromeOptionsDisableBeforeLaunch());

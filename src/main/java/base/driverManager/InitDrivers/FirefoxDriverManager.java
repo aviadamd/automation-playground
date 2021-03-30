@@ -15,6 +15,11 @@ public class FirefoxDriverManager extends DriverManager {
     @Override
     protected void createDriver() { firefoxDriverSupplier.get(); }
 
+    @Override
+    protected void stopDriver() {
+        driver.quit();
+    }
+
     private final Supplier<WebDriver> firefoxDriverSupplier = () -> {
         WebDriverManager.firefoxdriver().setup();
         driver = new FirefoxDriver(firefoxOptions());

@@ -1,5 +1,6 @@
 package base;
 
+import io.appium.java_client.service.local.AppiumDriverLocalService;
 import utilities.UiUtilitiesObjects;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
@@ -13,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class Base {
 
     public static WebDriver driver;
+    public static AppiumDriverLocalService server;
     public static PropertyConfig getProperty;
     public static UiUtilitiesObjects utilities;
     public static Screenshot imageScreenShot;

@@ -21,7 +21,12 @@ public class AndroidDriverManager extends DriverManager {
         driver = startAppiumServer();
     }
 
-    public static AppiumDriverLocalService server;
+    @Override
+    protected void stopDriver() {
+        driver.quit();
+        server.stop();
+    }
+
     protected static WebDriver startAppiumServer() {
         HashMap<String, String> environment = new HashMap<>();
         environment.put("PATH", getProperty.localBin + System.getenv("PATH"));

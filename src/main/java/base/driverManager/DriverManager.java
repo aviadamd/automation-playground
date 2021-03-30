@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 public abstract class DriverManager extends Base {
 
     protected abstract void createDriver();
+    protected abstract void stopDriver();
 
     public WebDriver getDriver() {
         if (driver == null) {
@@ -16,7 +17,7 @@ public abstract class DriverManager extends Base {
 
     public void quitDriver() {
         if (driver != null) {
-            driver.quit();
+            stopDriver();
             driver = null;
         }
     }
