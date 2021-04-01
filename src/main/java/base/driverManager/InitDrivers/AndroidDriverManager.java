@@ -16,6 +16,8 @@ import java.util.concurrent.TimeUnit;
 @Description("use as a class that extends DriverManager abstract class template")
 public class AndroidDriverManager extends DriverManager {
 
+    private static AppiumDriverLocalService server;
+
     @Override
     protected void createDriver() {
         driver = startAppiumServer();

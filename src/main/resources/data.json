@@ -1,0 +1,14 @@
+{
+  "dictionary" : [
+    {
+      "key": 0,
+      "userName": "selenium",
+      "password": "docker"
+    },
+    {
+      "key": 1,
+      "userName": "selenium",
+      "password": "docker"
+    }
+  ]
+}

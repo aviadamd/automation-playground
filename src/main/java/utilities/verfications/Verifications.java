@@ -11,21 +11,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 @Slf4j
-public class Verifications extends Base implements VerificationsTemplate {
+public class Verifications extends Base {
 
-    @Override
     public void load(WebElement element) {
         load(new ArrayList<>(Collections.singleton(element)));
     }
 
-    @Override
     public void load(ArrayList<WebElement> elements) {
         for (WebElement pageEle : elements) {
             utilities.uiActions().elementPresented(pageEle, 5);
         }
     }
 
-    @Override
     public void verifyNumberOfElements(ArrayList<WebElement> elements, int numbers) {
         try {
             WebDriverWait webDriverWait = new WebDriverWait(driver,10);
@@ -38,7 +35,6 @@ public class Verifications extends Base implements VerificationsTemplate {
         }
     }
 
-    @Override
     public boolean compereTexts(ArrayList<WebElement> elements, ArrayList<String> text) {
         if (elements.size() != text.size()) {
             Assert.fail(elements.size() + " not equals to " + text.size());
@@ -55,11 +51,9 @@ public class Verifications extends Base implements VerificationsTemplate {
                         " not equals expected test " + text.get(i));
             }
         }
-
         return false;
     }
 
-    @Override
     public boolean isTextEquals(WebElement actual, String expectedText) {
         load(actual);
         String text = actual.getText().trim();

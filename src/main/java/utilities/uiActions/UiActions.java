@@ -20,17 +20,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.function.BiConsumer;
 
-
 @Slf4j
-public class UiActions extends Base implements UiActionsTemplate {
+public class UiActions extends Base {
 
-    @Override
     public void perform(String text, BiConsumer<UiActions, Verifications> actionsConsumer) {
         log.debug(text);
         actionsConsumer.accept(utilities.uiActions(), utilities.verifications());
     }
 
-    @Override
     public void click(WebElement element) {
         if (elementToBeClickable(element)) {
             log.debug("click on " + element.getText());
@@ -38,24 +35,20 @@ public class UiActions extends Base implements UiActionsTemplate {
         } else Assert.fail("fail click on " + element.toString());
     }
 
-    @Override
     public void clickOptional(WebElement element) {
         if (elementToBeClickable(element) || elementPresented(element,1)) {
             click(element);
         }
     }
 
-    @Override
     public boolean elementPresented(WebElement element, int timeOut) {
         return webDriverWait(timeOut, ExpectedConditions.visibilityOf(element), element);
     }
 
-    @Override
     public boolean elementToBeClickable(WebElement element) {
        return webDriverWait(10, ExpectedConditions.elementToBeClickable(element), element);
     }
 
-    @Override
     public void sendKeys(WebElement element, String text) {
         if (elementToBeClickable(element)) {
             element.sendKeys(text);
@@ -63,19 +56,16 @@ public class UiActions extends Base implements UiActionsTemplate {
         } else Assert.fail("fail send keys to " + element.toString());
     }
 
-    @Override
     public void selectByVisibleText(WebElement element, String text) {
         Select value = new Select(element);
         value.selectByVisibleText(text);
     }
 
-    @Override
     public void selectByValue(WebElement element, String value) {
         Select select = new Select(element);
         select.selectByValue(value);
     }
 
-    @Override
     public void mouseHoverElements(WebElement element1, WebElement element2) {
         elementPresented(element1,5);
         Actions actions = new Actions(driver);
@@ -86,7 +76,6 @@ public class UiActions extends Base implements UiActionsTemplate {
                 .perform();
     }
 
-    @Override
     public <T> boolean webDriverWait(int timeOut, ExpectedCondition<T> conditions, WebElement element) {
         try {
             new WebDriverWait(driver, timeOut).until(conditions.compose(driver -> {
@@ -102,7 +91,6 @@ public class UiActions extends Base implements UiActionsTemplate {
         return false;
     }
 
-    @Override
     public void clear(WebElement element) {
         click(element);
         element.clear();

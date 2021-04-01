@@ -1,19 +1,19 @@
 package test.flightPageRegistration.test;
 
-import org.springframework.boot.test.context.SpringBootTest;
 import org.testng.annotations.Test;
 import test.FactoryBaseTest;
 import test.flightPageRegistration.components.*;
 
-@SpringBootTest
 public class BookFlightTest extends FactoryBaseTest {
 
     @Test(priority = 1)
     public void registrationPage() {
         RegistrationComponent registrationComponent = new RegistrationComponent();
         registrationComponent.landingPage();
-        registrationComponent.enterUserDetails("selenium", "docker");
-        registrationComponent.enterUserCredentials("selenium", "docker");
+        String user = jsonReader.jsonData(1).userName;
+        String password = jsonReader.jsonData(1).password;
+        registrationComponent.enterUserDetails(user, password);
+        registrationComponent.enterUserCredentials(user, password);
         registrationComponent.submit();
     }
 
