@@ -1,5 +1,6 @@
 package test.flightPageRegistration.test;
 
+import base.data.JsonReader;
 import org.testng.annotations.Test;
 import test.FactoryBaseTest;
 import test.flightPageRegistration.components.*;
@@ -8,6 +9,7 @@ public class BookFlightTest extends FactoryBaseTest {
 
     @Test(priority = 1)
     public void registrationPage() {
+        JsonReader jsonReader = new JsonReader();
         RegistrationComponent registrationComponent = new RegistrationComponent();
         registrationComponent.landingPage();
         String user = jsonReader.jsonData(1).userName;

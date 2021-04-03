@@ -1,6 +1,5 @@
 package base;
 
-import base.data.JsonReader;
 import utilities.UiUtilitiesObjects;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +14,6 @@ public class Base {
 
     public static WebDriver driver;
     public static PropertyConfig getProperty;
-    public static JsonReader jsonReader;
     public static UiUtilitiesObjects utilities;
     public static Screenshot imageScreenShot;
     public static ImageDiff imageDiff;
@@ -26,7 +24,6 @@ public class Base {
         String path = "/src/main/resources/config.properties";
         getProperty = new PropertyConfig(path);
         utilities = new UiUtilitiesObjects();
-        jsonReader = new JsonReader();
     }
 
     protected static void navigateToUrl(String url) {
